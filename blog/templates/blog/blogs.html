@@ -1,0 +1,15 @@
+<h1>Kinnniku Blog</h1>
+<a href="{% url 'foods' %}">戻る</a>
+<a href="{% url 'blog-create' %}">追加</a>
+{% if blogs %}
+  {% for blog in blogs %}
+    <p>
+      {{ blog.user }} | {{ blog.title }}
+      <a href="{% url 'blog' blog.id %}">詳細</a>
+      <a href="{% url 'blog-update'  blog.id %}">編集</a>
+      <a href="{% url 'blog-delete' blog.id %}">削除</a>
+    </p>
+  {% endfor %}
+{% else %}
+<p>No blogs available</p>
+{% endif %}

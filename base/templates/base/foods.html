@@ -1,18 +1,32 @@
+{% if request.user.is_authenticated %}
+  <p>{{ request.user }}</p>
+  <a href="">Logout</a>
+{% else %}
+  <a href="">Login</a>
+{% endif %}
+
+<hr>
+
 <h1>今日食べたもの</h1>
 <p>本日は{% now "F" %}{% now "j" %}日({% now "l" %})です</p>
+
 <a href="{% url 'create' %}">追加</a>
+<a href="{% url 'all_foods' %}">一覧</a>
 
-<table>
-  <tr>
-    <th>食べもの</th>
-    <th>カロリー</th>
-    <th>タンパク質</th>
-    <th>脂質</th>
-    <th>炭水化物</th>
-    <th>日付</th>
-  </tr>
-
-  {% for food in foods %}
+<!-- {{ kcal.kcal__sum }}
+  {{ protein.protein__sum }} -->
+  <table>
+    <tr>
+      <th>食べもの</th>
+      <th>カロリー</th>
+      <th>タンパク質</th>
+      <th>脂質</th>
+      <th>炭水化物</th>
+      <th>日付</th>
+      <th>カテゴリ</th>
+    </tr>
+    
+    {% for food in foods %}
     <tr>
       <td>{{ food.name }}</td>
       <td>{{ food.kcal }}</td>
@@ -20,17 +34,28 @@
       <td>{{ food.fat }}</td>
       <td>{{ food.carb }}</td>
       <td>{{ food.eaten_date }}</td>
+      <td>{{ food.catogory }}</td>
       <td><a href="{% url 'update' food.id %}">編集</a></td>
       <td><a href="{% url 'delete' food.id %}">削除</a></td>
     </tr>
-  {% empty %}
+    {% empty %}
     <h4>No itmes</h4>
-  {% endfor %}
-  <tr>
-    <th>合計</th>
-    <th>{{ ttl_kcal }}</th>
-    <th>{{ ttl_protein }}</th>
-    <th>{{ ttl_fat }}</th>
-    <th>{{ ttl_carb }}</th>
-  </tr>
-</table>
+    {% endfor %}
+    <tr>
+      <th>合計</th>
+      <th>{{ ttl_kcal }}</th>
+      <th>{{ ttl_protein }}</th>
+      <th>{{ ttl_fat }}</th>
+      <th>{{ ttl_carb }}</th>
+    </tr>   
+    <tr>
+      <th>目標</th>
+      <th>1960</th>
+      <th>130</th>
+      <th>54.5</th>
+      <th>237</th>
+    </tr>
+  </table>
+  
+<p>目標は1960kcal, P130, F54.5, C237だよ</p>
+<a href="{% url 'blogs' %}">ブログへ</a>

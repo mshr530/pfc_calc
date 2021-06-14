@@ -1,0 +1,7 @@
+<h1>Blog Form</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">追加</button>
+</form>

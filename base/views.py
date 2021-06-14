@@ -2,23 +2,44 @@ from django.shortcuts import render
 from .models import Food
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 # Create your views here.
+
+from django.contrib.auth.views import LoginView
+
+class CustomLoginView(LoginView):
+  template_name = 'base/login.html'
+  fields = '__all__'
+  redirect_authenticated_user = True
+
+  def get_success_url(self):
+    return reverse_lazy('foods')
+
+class FoodList(ListView):
+  model = Food
+  template_name = 'base/all_foods.html'
+  context_object_name = 'foods'
+  ordering = ['-created']
+
 import datetime
 from django.db.models import Sum
 def foods(request):
   today = datetime.datetime.today()
   foods = Food.objects.filter(eaten_date=today)
-  kcal = foods.aggregate(Sum('kcal'))
-  #合計キロカロリー
+  # これでも合計カロリーは出る
+  # kcal = foods.aggregate(Sum('kcal'))
+  # protein = foods.aggregate(Sum('protein'))
+
+  # total_kcal
   kcal_list = [food['kcal'] for food in foods.values('kcal')]
   ttl_kcal = sum(kcal_list)
     # total_protein
   protein_list = [food['protein'] for food in foods.values('protein')]
   ttl_protein = sum(protein_list)
-    #合計キロカロリー
+    # total_fat
   fat_list = [food['fat'] for food in foods.values('fat')]
   ttl_fat = sum(fat_list)
-    #合計キロカロリー
+    # total_carb
   carb_list = [food['carb'] for food in foods.values('carb')]
   ttl_carb = sum(carb_list)
   
@@ -28,7 +49,6 @@ def foods(request):
     'ttl_protein': ttl_protein,
     'ttl_fat': ttl_fat,
     'ttl_carb': ttl_carb,
-    'kcal': kcal,
   }
   return render(request, 'base/foods.html', context)
 
@@ -47,7 +67,6 @@ def foods(request):
   #   context['food'] = 'pancake'
   #   return context
 
-from django.urls import reverse_lazy
 class FoodCreate(CreateView):
   template_name = 'base/create.html'
   model = Food

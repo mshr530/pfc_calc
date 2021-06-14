@@ -1,8 +1,8 @@
 <h1>削除</h1>
-<a href="{% url 'foods' %}">戻る</a>
+<a href="{% url 'blogs' %}">戻る</a>
 
 <form action="" method="post">
   {% csrf_token %}
-  <p>本当にこの食べ物を削除しますか？｜{{food}}</p>
+  <p>本当にこの記事を削除しますか？｜{{blog}}</p>
   <button type="submit">削除</button>
 </form>

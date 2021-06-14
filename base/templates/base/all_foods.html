@@ -1,0 +1,35 @@
+<h1>食事一覧</h1>
+<p>本日は{% now "F" %}{% now "j" %}日({% now "l" %})です</p>
+<a href="{% url 'foods' %}">戻る</a>
+<a href="{% url 'blogs' %}">ブログへ</a>
+
+<!-- {{ kcal.kcal__sum }}
+{{ protein.protein__sum }} -->
+<table>
+  <tr>
+    <th>食べもの</th>
+    <th>カロリー</th>
+    <th>タンパク質</th>
+    <th>脂質</th>
+    <th>炭水化物</th>
+    <th>日付</th>
+    <th>カテゴリ</th>
+  </tr>
+
+  {% for food in foods %}
+    <tr>
+      <td>{{ food.name }}</td>
+      <td>{{ food.kcal }}</td>
+      <td>{{ food.protein }}</td>
+      <td>{{ food.fat }}</td>
+      <td>{{ food.carb }}</td>
+      <td>{{ food.eaten_date }}</td>
+      <td>{{ food.catogory }}</td>
+      <td><a href="{% url 'update' food.id %}">編集</a></td>
+      <td><a href="{% url 'delete' food.id %}">削除</a></td>
+    </tr>
+  {% empty %}
+    <h4>No itmes</h4>
+  {% endfor %}
+
+</table>
