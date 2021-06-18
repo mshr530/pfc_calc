@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Blog
 from django.urls import reverse_lazy
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -21,20 +22,25 @@ def blog(request, pk):
   }
   return render(request, 'blog/blog.html', context)
 
-class BlogCreate(CreateView):
+class BlogCreate(LoginRequiredMixin, CreateView):
   model = Blog
   template_name = 'blog/create.html'
-  fields = '__all__'
+  fields = ['title', 'content']
   success_url = reverse_lazy('blogs')
 
-class BlogUpdate(UpdateView):
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super(BlogCreate, self).form_valid(form)
+
+class BlogUpdate(LoginRequiredMixin, UpdateView):
   model = Blog
   template_name = 'blog/update.html'
-  fields = '__all__'
+  fields = ['title', 'content']
   success_url = reverse_lazy('blogs')
 
-class BlogDelete(DeleteView):
-  template_name = 'base/delete.html'
+
+class BlogDelete(LoginRequiredMixin, DeleteView):
+  template_name = 'blog/delete.html'
   model = Blog
   context_object_name = 'blog'
   success_url = reverse_lazy('blogs')

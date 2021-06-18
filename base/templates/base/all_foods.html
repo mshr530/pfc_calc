@@ -1,35 +1,51 @@
-<h1>食事一覧</h1>
-<p>本日は{% now "F" %}{% now "j" %}日({% now "l" %})です</p>
-<a href="{% url 'foods' %}">戻る</a>
-<a href="{% url 'blogs' %}">ブログへ</a>
+{% extends 'base.html' %}
+{% block title %}｜一覧{% endblock %}
+{% block content %}
 
-<!-- {{ kcal.kcal__sum }}
-{{ protein.protein__sum }} -->
-<table>
-  <tr>
-    <th>食べもの</th>
-    <th>カロリー</th>
-    <th>タンパク質</th>
-    <th>脂質</th>
-    <th>炭水化物</th>
-    <th>日付</th>
-    <th>カテゴリ</th>
-  </tr>
+<div class="header-bar">
+  <a href="{% url 'my-foods-list' %}">&#8592; 戻る</a>
+</div>
 
-  {% for food in foods %}
+<div class="body-container">
+  <h1>食べ物一覧</h1>
+  <p>本日は{% now "F" %}{% now "j" %}日({% now "l" %})です</p>
+    <form action="" method="get" style="margin-bottom: 20px;">
+      <input type="text" name="search-area" value='{{search_input}}' placeholder="例）納豆">
+      <button class="search-button" type="submit">検索</button>
+    </form>
+
+  <table>
+    <tr class="table-header">
+      <th class="align-left">食べもの</th>
+      <th>kcal</th>
+      <th>P</th>
+      <th>F</th>
+      <th>C</th>
+      <th>日付</th>
+      <th>カテゴリ</th>
+    </tr>
+    
+    {% for food in foods %}
     <tr>
-      <td>{{ food.name }}</td>
+      <td class="align-left">{{ food.name }}</td>
       <td>{{ food.kcal }}</td>
       <td>{{ food.protein }}</td>
       <td>{{ food.fat }}</td>
       <td>{{ food.carb }}</td>
       <td>{{ food.eaten_date }}</td>
       <td>{{ food.catogory }}</td>
-      <td><a href="{% url 'update' food.id %}">編集</a></td>
-      <td><a href="{% url 'delete' food.id %}">削除</a></td>
+      <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+      <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
     </tr>
-  {% empty %}
+    {% empty %}
     <h4>No itmes</h4>
-  {% endfor %}
+    {% endfor %}
+    
+  </table>
+</div>
+<!-- {{ color }} -->
+<!-- {{ kcal.kcal__sum }}
+  {{ protein.protein__sum }} -->
+  
 
-</table>
+{% endblock %}

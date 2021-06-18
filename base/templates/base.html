@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PFC{% block title %}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.15.1/css/all.css' integrity='sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp' crossorigin='anonymous'>
+  <style>
+    body{
+      background-color: #fafafa;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      padding-top: 50px;
+      color: #333;
+    }
+
+    .container{
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'RocknRoll One', sans-serif;
+        font-weight: 100;
+    }
+
+    a {
+      color: #5e6468;
+      text-decoration: none;
+    }
+
+    .header-bar{
+      display: flex;
+      justify-content: space-between;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px 5px 0 0;
+      background: linear-gradient(90deg, #FFC107 0%,  #ff8b5f 40%, #ff8b5f 100%);
+    }
+    .header-bar a{
+      color: white;
+      text-decoration: none;
+      height: 16px;
+    }
+    .body-container {
+      padding: 20px;
+      border-radius: 0 0 5px 5px;
+    }
+    .body-container h1 {
+      margin: 0 0 5px;
+    }
+    .body-header {
+      margin-bottom: 20px;
+    }
+    .body-header-title {
+      display: flex;
+      justify-content: space-between;
+    }
+    .body-container .body-header-left h1 {
+      margin: 0 0 5px;
+    }
+    .body-container .body-header-right a {
+      display: inline-block;
+      padding: 5px 0;
+      font-size: 30px;
+      color: #ff8b5f;
+      text-decoration: none;
+    }
+    table{
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table tr.table-header th{
+      color: #ff8b5f;
+      padding-bottom: 5px;
+    }
+    table th {
+      color: #000;
+    }
+    table td {
+      text-align: center;
+      padding-bottom: 5px;
+    }
+    table .total {
+      padding-top: 15px;
+    }
+    .fa-trash-alt {
+      color: #ff8b5f;
+    }
+    .align-left {
+      text-align: left;
+      width: 140px;
+    }
+
+    input[type=text],
+    input[type=password],
+    textarea {
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+    }
+    select,
+    input[type=date],
+    input[type=number]{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 15%;
+      font-size: 16px;
+      background: #fff;
+    }
+    
+    label {
+      display: block;
+      padding-top: 5px;
+      width: 100px;
+    }
+    .button {
+      border: 1px solid #ff8b5f;
+      background: #fff;
+      color: #ff8b5f;
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      margin-top: 20px;
+    }
+  
+    .search-button {
+      border: 1px solid #ff8b5f;
+      background: #fff;
+      color: #ff8b5f;
+      padding: 10px 10px 7px;
+      margin-left: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .blog select{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 50%;
+    }
+    .blog input[type=text],
+    .blog textarea {
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 90%;
+    }
+    .blog-each {
+      padding: 16px 0;
+      border-top: 1px solid rgb(235, 235, 235);
+    }
+    .blog-each .blog-container-top{
+      display: flex;
+      justify-content: space-between;
+    }
+    .blog-each .blog-container-top .blog-left{
+      color:  #5e6468;
+      margin: 0;
+      font-size: 14px;
+    }
+    .blog-each .blog-container-top .blog-links {
+      margin: 0px 0 0 10px;
+    }
+    .blog-each .blog-container-top .blog-links a{
+      margin-left: 10px;
+    }
+    .blog-each h2 {
+      margin: 5px 0 0;
+      font-size: 18px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% block content %}
+    
+    {% endblock %}
+  </div>
+</body>
+</html>

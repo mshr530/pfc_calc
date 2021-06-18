@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}｜目標設定{% endblock %}
+{% block content %}
+
+<div class="header-bar">
+  <a href="{% url 'my-foods-list' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <h1>目標設定</h1>
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    <label for="kcal">カロリー</label>
+    <input type="number" name="kcal" id="kcal">
+
+    <label for="protein">タンパク質</label>
+    <input type="number" name="protein" id="protein">
+
+    <label for="fat">脂質</label>
+    <input type="number" name="fat" id="fat">
+
+    <label for="carb">炭水化物</label>
+    <input type="number" name="carb" id="carb">
+    {{target_kcal}}
+    <button class="button" type="submit">完了</button>
+  </form>
+</div>
+
+{% endblock %}

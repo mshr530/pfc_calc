@@ -1,8 +1,17 @@
-<h1>編集</h1>
-<a href="{% url 'blogs' %}">戻る</a>
+{% extends 'base.html' %}
+{% block title %}｜記事編集{% endblock %}
+{% block content %}
 
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">完了</button>
-</form>
+<div class="header-bar">
+  <a href="{% url 'blogs' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container blog">
+  <h1>編集</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="button" type="submit">完了</button>
+  </form>
+</div>
+{% endblock %}
