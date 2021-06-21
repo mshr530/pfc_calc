@@ -3,15 +3,15 @@
 {% block content %}
 
 <div class="header-bar">
-  <a href="{% url 'my-foods-list' %}">&#8592; 戻る</a>
+  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
 </div>
 
 <div class="body-container">
   <h1>食べもの削除</h1>
   <form action="" method="post">
     {% csrf_token %}
-    <p>本当にこの食べ物を削除しますか？</p>
-    <h2>{{food.name}} ({{food.kcal}}kcal, {{food.protein}}P, {{food.fat}}F, {{food.carb}}C)</h2>
+    <p style="margin-bottom: 0px;">本当にこの食べ物を削除しますか？</p>
+    <h4 style="margin-top: 0px;">{{food.name}} ({{food.kcal}}kcal, {{food.protein}}P, {{food.fat}}F, {{food.carb}}C)</span>
     
     <button class="button" type="submit">削除</button>
   </form>

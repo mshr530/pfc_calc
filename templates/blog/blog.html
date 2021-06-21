@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}｜{{ blog.title }}{% endblock %}
+{% block content %}
+
+<section class="blog-detail-page">
+  <div class="header-bar">
+    <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+  </div>
+  
+  <div class="body-container blog">
+    <p>{{ blog.user }}が{{ blog.created }}に作成</p>
+    <h1>{{ blog.title }}</h1>
+    <p class="blog-content">{{ blog.content }}</p>
+    <div class="ref-links">
+      {% if link_1 %}
+        <a href="{{ blog.link_1 }}">参考リンク</a>
+      {% endif %}
+      {% if link_2 %}
+        <a href="{{ blog.link_2 }}">参考リンク</a>
+      {% endif %}
+    </div>  
+  </div>
+
+</section>
+{% endblock %}

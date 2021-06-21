@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Food, Target
+from blog.models import Blog
+from django.contrib.auth.models import User
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
@@ -11,8 +13,7 @@ from django.contrib.auth import login
 # function-based view 用のアクセス制限
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.db.models import Sum
-
+from django.db.models import Sum, Q
 
 
 class CustomLoginView(LoginView):
@@ -22,13 +23,13 @@ class CustomLoginView(LoginView):
   redirect_authenticated_user = True
 
   def get_success_url(self):
-    return reverse_lazy('my-foods-list')
+    return reverse_lazy('today_foods')
 
 class RegisterPage(FormView):
   template_name = 'base/register.html'
   form_class = UserCreationForm
   redirect_authenticated_user = True
-  success_url = reverse_lazy('my-foods-list')
+  success_url = reverse_lazy('today')
 
   def form_valid(self, form):
     user = form.save()
@@ -38,7 +39,7 @@ class RegisterPage(FormView):
 
   def get(self, *args, **kwargs):
     if self.request.user.is_authenticated:
-      return redirect('foods')
+      return redirect('today_foods')
     return super(RegisterPage, self).get(*args, **kwargs)
 
 
@@ -49,16 +50,18 @@ class FoodList(LoginRequiredMixin, ListView):
   template_name = 'base/all_foods.html'
   context_object_name = 'foods'
   ordering = ['-created']
-  def get_context_data(self, **kwargs):
-      context = super().get_context_data(**kwargs)
-      # context内の名前で左の値がhtml上で使えるようになる
-      context['color'] = 'red'
-      context['foods'] = context['foods'].filter(user=self.request.user)
-      search_input = self.request.GET.get('search-area') or ''
-      if search_input:
-        context['foods'] = context['foods'].filter(name__icontains=search_input)
-      context['search_input'] = search_input
-      return context
+  paginate_by = 20
+  # def get_context_data(self, **kwargs):
+  #   context = super().get_context_data(**kwargs)
+  #   # context内の名前で左の値がhtml上で使えるようになる
+  #   context['color'] = 'red'
+  #   context['foods'] = context['foods'].filter(user=self.request.user)
+
+  #   search_input = self.request.GET.get('search-area') or ''
+  #   if search_input:
+  #     context['foods'] = context['foods'].filter(Q(name__icontains=search_input)|Q(category__icontains=search_input))
+  #   context['search_input'] = search_input
+  #   return context
 
 
 
@@ -105,42 +108,30 @@ def foods(request):
     'user_snack_list': user_snack_list,
     'target': target,
   }
-  return render(request, 'base/my_foods_list.html', context)
-
-# class FoodList(ListView):
-#   model = Food
-#   template_name = 'base/foods.html'
-#   # html内で使う変数名をobject_listから任意名に変更
-#   context_object_name = 'foods'
-#   def get_context_data(self, **kwargs):
-#     context = super().get_context_data(**kwargs)
-#     context['foods'] = [food['kcal'] for food in Food.objects.values('kcal')]
-#     context['total_total'] = sum(context['foods'])
-#     return context
-  # def get_context_data(self, **kwargs):
-  #   context = super().get_context_data(**kwargs)
-  #   context['food'] = 'pancake'
-  #   return context
-
+  return render(request, 'base/today_foods.html', context)
 
 
 class TargetCreate(LoginRequiredMixin, CreateView):
   template_name = 'base/target.html'
   model = Target
   fields = '__all__'
-  success_url = reverse_lazy('my-foods-list')
-  
+  success_url = reverse_lazy('today_foods')
+  context_object_name = 'targets'
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # context内の名前で左の値がhtml上で使えるようになる
+    context['target'] = Target.objects.latest('created')
+    return context
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super(TargetCreate, self).form_valid(form)
-
 
 
 class FoodCreate(LoginRequiredMixin, CreateView):
   template_name = 'base/create.html'
   model = Food
   fields = ['category','name', 'kcal', 'protein', 'fat', 'carb']
-  success_url = reverse_lazy('my-foods-list')
+  success_url = reverse_lazy('today_foods')
   
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -153,7 +144,7 @@ class FoodUpdate(LoginRequiredMixin, UpdateView):
   template_name = 'base/update.html'
   model = Food 
   fields = ['category','name', 'kcal', 'protein', 'fat', 'carb']
-  success_url = reverse_lazy('my-foods-list')
+  success_url = reverse_lazy('today_foods')
 
 
 
@@ -161,5 +152,33 @@ class FoodDelete(LoginRequiredMixin, DeleteView):
   template_name = 'base/delete.html'
   model = Food 
   context_object_name = 'food'
-  success_url = reverse_lazy('my-foods-list')
+  success_url = reverse_lazy('today_foods')
 
+def user_page(request, pk):
+  user = get_object_or_404(User, pk=pk)
+  user_blogs = Blog.objects.order_by('-created').filter(user=request.user)[:5]
+  today = datetime.datetime.today()
+  # foods = Food.objects.filter(eaten_date=today)
+  today_user_foods = Food.objects.order_by('-category').filter(user=request.user, eaten_date=today)
+  
+  context = {
+    'user': user,
+    'today_user_foods': today_user_foods,
+    'user_blogs': user_blogs,
+  }
+  print(user_blogs)
+  return render(request, 'base/user_page.html', context)
+
+def food_search_results(request):
+  queryset_list = Food.objects.order_by('-created')
+  
+  if 'keywords' in request.GET:
+    keywords = request.GET['keywords']
+    if keywords:
+      queryset_list = queryset_list.filter(Q(name__icontains=keywords)|Q(category__icontains=keywords)|Q(eaten_date__icontains=keywords))
+  
+  context = {
+    'foods': queryset_list
+  }
+
+  return render(request, 'base/food_search_results.html', context)

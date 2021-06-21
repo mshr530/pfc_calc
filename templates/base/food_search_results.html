@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}｜検索結果{% endblock %}
+{% block content %}
+
+<div class="header-bar">
+  <a href="{% url 'all_foods' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <h1>検索結果</h1>
+  <form action="{% url 'food_search_results' %}" method="get" style="margin-bottom: 20px;">
+    <input type="text" name="keywords" value='{{keywords}}' placeholder="例）納豆">
+    <button class="search-button" type="submit">検索</button>
+  </form>
+
+  <table>
+    <tr class="table-header">
+      <th class="align-left">食べもの</th>
+      <th>kcal</th>
+      <th>P</th>
+      <th>F</th>
+      <th>C</th>
+      <th>日付</th>
+      <th>カテゴリ</th>
+    </tr>
+    {% if foods %}
+      {% for food in foods %}
+      <tr>
+        <td class="align-left">{{ food.name }}</td>
+        <td>{{ food.kcal }}</td>
+        <td>{{ food.protein }}</td>
+        <td>{{ food.fat }}</td>
+        <td>{{ food.carb }}</td>
+        <td>{{ food.eaten_date }}</td>
+        <td>{{ food.category }}</td>
+        <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+        <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+      </tr>
+      {% endfor %}
+    {% else %}
+    <td colspan="8" style="padding: 20px;">｜食べ物なし｜</td>
+    {% endif %}
+</div>
+
+{% endblock %}

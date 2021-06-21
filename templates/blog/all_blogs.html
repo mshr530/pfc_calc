@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}｜全メモ一覧{% endblock %}
+{% block content %}
+
+<!-- header-bar -->
+<div class="header-bar">
+  <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+</div>
+<!-- ///header-bar -->
+
+<div class="body-container">
+  <!-- body-header-bar -->
+  <div class="body-header">
+    <h1>メモ一覧</h1>
+    <div class="p-over-search">
+      <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
+      <p>・日付は月-日で検索してください。</p> -->
+      <p>・ユーザー、日付、タイトルで検索できます。日付は月-日で検索してください。</p>
+    </div>
+    <form action="{% url 'blog_search_results' %}" method="get" style="margin-bottom: 20px;">
+      <input type="text" name="keywords" value='{{keywords}}' placeholder="例）筋トレ">
+      <button class="search-button" type="submit">検索</button>
+    </form>
+  </div>
+  <!-- ///body-header-bar -->
+
+  <!-- 記事一覧 -->
+  <div class="blog-body">
+
+
+    {% if blogs %}
+      {% for blog in blogs %}
+        <div class="blog-each">
+          <div class="blog-each-top">
+            <p class="blog-left"><a href="{% url 'user_page' user.id %}">
+              {% if request.user == blog.user %}
+                あなた
+              {% else %}
+                {{ blog.user }}
+              {% endif %}
+              </a>が{{ blog.updated }}に投稿</p>
+            <!-- {% if blog.created == blog.updated %}
+              {{ blog.created }}に投稿</p>
+            {% else %}
+              {{ blog.updated }}に更新</p>
+            {% endif %}
+            {{ blog.created }}, {{ blog.updated }} -->
+            <div class="blog-each-links">
+              <a href="{% url 'blog' blog.id %}" class="fas fa-info"></a>
+              {% if request.user == blog.user %}
+                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+              {% endif %}
+            </div>
+          </div>
+          <h2>{{ blog.title }}</h2>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>書かれた記事はありません。</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

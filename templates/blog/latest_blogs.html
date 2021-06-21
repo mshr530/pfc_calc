@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}｜新着メモ{% endblock %}
+{% block content %}
+
+<!-- header-bar -->
+<div class="header-bar">
+  <div>
+    <h1>筋肉、栄養学メモ</h1>
+    <h3 style="margin: 0;">今日は新しく<span style="color:#333;">{{ count }}</span>記事投稿されました！</h3>
+  </div>
+
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}" class="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Login</a>
+  {% endif %}
+</div>
+<!-- ///header-bar -->
+
+<div class="body-container">
+  <!-- body-header-bar -->
+  <div class="body-header">
+    <div class="body-header-title">
+      <div class="body-header-left">
+        <h1>新着メモ</h1>
+        <div class="links">
+          <a href="{% url 'today_foods' %}">今日食べたもの</a>
+          <a href="{% url 'all_blogs' %}">全記事</a>
+        </div>
+      </div>
+      <div class="body-header-right">
+        <a href="{% url 'blog-create' %}" class="fas fa-plus"></a>
+      </div>
+    </div>
+  </div>
+  <!-- ///body-header-bar -->
+
+  <!-- 記事一覧 -->
+  <div class="blog-body">
+    {% if blogs %}
+      {% for blog in blogs %}
+        <div class="blog-each">
+          <div class="blog-each-top">
+            <p class="blog-left"><a href="{% url 'user_page' user.id %}">
+              {% if request.user == blog.user %}
+                あなた
+              {% else %}
+                {{ blog.user }}
+              {% endif %}
+              </a>が{{ blog.updated }}に投稿</p>
+            <!-- {% if blog.created == blog.updated %}
+              {{ blog.created }}に投稿</p>
+            {% else %}
+              {{ blog.updated }}に更新</p>
+            {% endif %}
+            {{ blog.created }}, {{ blog.updated }} -->
+            <div class="blog-each-links">
+              <a href="{% url 'blog' blog.id %}" class="fas fa-info"></a>
+              {% if request.user == blog.user %}
+                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+              {% endif %}
+            </div>
+          </div>
+          <h2>{{ blog.title }}</h2>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>書かれた記事はありません。</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

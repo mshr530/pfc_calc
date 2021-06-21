@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="header-bar">
-  <a href="{% url 'my-foods-list' %}">&#8592; 戻る</a>
+  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
 </div>
 
 <div class="body-container">
@@ -12,17 +12,16 @@
   <form action="" method="post">
     {% csrf_token %}
     <label for="kcal">カロリー</label>
-    <input type="number" name="kcal" id="kcal">
+    <input type="number" name="kcal" id="kcal" value="{{ target.kcal }}">
 
     <label for="protein">タンパク質</label>
-    <input type="number" name="protein" id="protein">
+    <input type="number" name="protein" id="protein" value="{{ target.protein }}">
 
     <label for="fat">脂質</label>
-    <input type="number" name="fat" id="fat">
+    <input type="number" name="fat" id="fat" value="{{ target.fat }}">
 
     <label for="carb">炭水化物</label>
-    <input type="number" name="carb" id="carb">
-    {{target_kcal}}
+    <input type="number" name="carb" id="carb" value="{{ target.carb }}">
     <button class="button" type="submit">完了</button>
   </form>
 </div>
