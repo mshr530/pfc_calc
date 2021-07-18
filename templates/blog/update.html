@@ -3,13 +3,16 @@
 {% block content %}
 
 <div class="header-bar">
-  <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+  <a href="{% url 'blog' blog.id %}">&#8592; 戻る</a>
 </div>
 
 <div class="body-container blog">
-  <h1>編集</h1>
+  <div class="body-header">
+    <h1>編集</h1>
+  </div>
   <form action="" method="post">
     {% csrf_token %}
+    <p>*が付いてるものは必須です。</p>
     {{ form.as_p }}
     <button class="button" type="submit">完了</button>
   </form>

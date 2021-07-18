@@ -8,9 +8,13 @@
 
 
 <div class="body-container">
+  {% include 'partials/_alerts.html' %}
   <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <label for='username'>ユーザー名</label>
+    <input type="text" name='username' required>
+    <label for='password'>パスワード</label>
+    <input type="password" name='password' required>
     <button class="button" type="submit">ログイン</button>
   </form>
   <p>アカウントをお持ちでないですか？こちらから<a class="register" href="{% url 'register' %}">ユーザー登録</a>できます。</p>

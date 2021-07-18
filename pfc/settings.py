@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c9p8whe*p=ahl4&&g!!tzijvyie$93y@r)7r#a*cwwbwg^-bst
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'blog.apps.BlogConfig',
+    'account.apps.AccountConfig',
+    'taggit',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,6 +130,10 @@ LOGIN_URL = 'login'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

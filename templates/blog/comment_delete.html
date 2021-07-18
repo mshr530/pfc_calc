@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}｜コメント削除{% endblock %}
+{% block content %}
+
+<div class="header-bar">
+  <a href="{% url 'blog' blog.id %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <div class="body-header">
+    <h1>コメント削除</h1>
+  </div>
+
+  <form action="{% url 'comment_delete' blog.id comment.id %}" method="post">
+    {% csrf_token %}
+    <p class="form-txt">本当にこの記事を削除しますか？</p>
+    <h2 class="form-bld-txt">{{ comment.text }}</h2>
+    <button class="button" type="submit">削除</button>
+  </form>
+</div>
+{% endblock %}

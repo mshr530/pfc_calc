@@ -3,15 +3,18 @@
 {% block content %}
 
 <div class="header-bar">
-  <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+  <a href="{% url 'blog' blog.id %}">&#8592; 戻る</a>
 </div>
 
 <div class="body-container">
-  <h1>記事削除</h1>
+  <div class="body-header">
+    <h1>記事削除</h1>
+  </div>
+
   <form action="" method="post">
     {% csrf_token %}
-    <p style="margin-bottom: 0px;">本当にこの記事を削除しますか？</p>
-    <h3 style="margin-top: 0px;">{{ blog.title }}</h2>
+    <p class="form-txt">本当にこの記事を削除しますか？</p>
+    <h2 class="form-bld-txt">{{ blog.title }}</h2>
     <button class="button" type="submit">削除</button>
   </form>
 </div>

@@ -5,10 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PFC{% block title %}{% endblock %}</title>
+  <!-- # Google Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
+  <!-- Fontawesome -->
   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.15.1/css/all.css' integrity='sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp' crossorigin='anonymous'>
   <style>
     body{
@@ -16,6 +22,7 @@
       font-family: 'M PLUS Rounded 1c', sans-serif;
       padding-top: 50px;
       color: #333;
+      letter-spacing: 0.05em;
     }
 
     .container{
@@ -25,8 +32,7 @@
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-family: 'RocknRoll One', sans-serif;
-        font-weight: 100;
+      font-family: 'Noto Serif JP', serif;
     }
 
     a {
@@ -47,7 +53,17 @@
       border-radius: 5px 5px 0 0;
       background: linear-gradient(90deg, #FFC107 0%,  #ff8b5f 40%, #ff8b5f 100%);
     }
-    .header-bar a.logout {
+    .header-bar h1 {
+      font-size: 2rem;
+      margin: 28px 0;
+    }
+    .header-bar span {
+      color: #333;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 1.5rem;
+      
+    }
+    .header-bar .top-right-link a {
       height: 24px;
       color: white;
       text-decoration: none;
@@ -56,18 +72,23 @@
       color: white;
       text-decoration: none;
     }
+    .header-bar .top-right-link a i {
+      margin-right: 3px;
+    }
     .header-bar h3{
       margin: 0;
+      font-size: 1rem;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
     }
     .body-container {
-      padding: 20px;
+      padding: 20px 20px 20px;
       border-radius: 0 0 5px 5px;
     }
     .body-container h1 {
       margin: 0 0 5px;
     }
     .body-header {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     .body-header-title {
       display: flex;
@@ -75,6 +96,9 @@
     }
     .body-container .body-header-left h1 {
       margin: 0 0 5px;
+    }
+    .body-container h1{
+      font-size: 2rem;
     }
     .body-container .body-header-left .links a {
       display: inline-block;
@@ -100,7 +124,7 @@
     }
     table td {
       text-align: center;
-      padding-bottom: 5px;
+      padding-bottom: 3px;
     }
     table .total {
       padding-top: 15px;
@@ -110,7 +134,13 @@
     }
     .align-left {
       text-align: left;
-      width: 140px;
+      width: 25%;
+    }
+    td.align-left{
+      padding-left: 10px;
+    }
+    td.align-left.all-foods-data {
+      padding: 0;
     }
 
     input[type=text],
@@ -120,7 +150,12 @@
       border-radius: 5px;
       padding: 10px;
       width: 80%;
-      font-size: 16px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    input[type=text]#id_eaten_date{
+      width: 20%;
+      display: block;
     }
     select,
     input[type=date],
@@ -129,42 +164,55 @@
       border: 1px solid #ff8b5f;
       border-radius: 5px;
       padding: 10px;
-      width: 15%;
-      font-size: 16px;
+      width: 20%;
+      font-size: 1rem;
       background: #fff;
+      box-sizing: border-box;
     }
-    
+
     label {
+      margin-top: 10px;
       display: block;
-      padding-top: 5px;
-      width: 200px;
+      font-size: 0.9rem;
     }
     .button {
       border: 1px solid #ff8b5f;
       background: #fff;
       color: #ff8b5f;
       padding: 5px 10px;
-      font-size: 14px;
+      font-size: 0.9rem;
       border-radius: 5px;
       cursor: pointer;
       text-decoration: none;
       display: block;
-      margin-top: 20px;
+      margin: 20px 0 10px;
     }
-    .p-over-search {
-      margin: 10px 0 5px 0;
+    
+    .form-txt {
+      margin: 20px 0 0;
     }
-    .p-over-search p {
-      font-size: 14px;
-      margin: 0;
+    .form-bld-txt {
+      margin: 0 0 20px;
     }
+    .no-results {
+      padding: 20px;
+    }
+
+    .notion-sm p{
+      margin: 10px 0 0;
+      font-size: 0.8rem;
+    }
+    .notion-md p {
+      margin: 10px 0 0;
+    }
+    
     .search-button {
       border: 1px solid #ff8b5f;
       background: #fff;
       color: #ff8b5f;
       padding: 10px 10px 7px;
       margin-left: 10px;
-      font-size: 14px;
+      font-size: 0.9rem;
       border-radius: 5px;
       cursor: pointer;
     }
@@ -176,16 +224,21 @@
       border-radius: 5px;
       padding: 10px;
       width: 80%;
-      max-width: 80%;
       max-height: 500px;
+      display: block;
+      box-sizing: border-box;
+
     }
     .blog select{
       border: 1px solid #ff8b5f;
       border-radius: 5px;
       padding: 10px;
       width: 20%;
-      font-size: 16px;
+      font-size: 1rem;
       background: #fff;
+    }
+    form span {
+      font-size: 0.9rem;
     }
     .blog-each {
       padding: 16px 0;
@@ -196,40 +249,151 @@
       justify-content: space-between;
     }
     .blog-each .blog-each-top .blog-left a{
-      color:  #333;
-      margin: 0;
-      font-size: 14px;
+      color:  #5e6468;
+      font-size: 0.9rem;
     }
     .blog-each .blog-each-top .blog-left{
-      color:  #5e6468;
+      color:  #949494;
       margin: 0;
-      font-size: 14px;
+      font-size: 0.9rem;
+    }
+    .blog-each-new {
+      margin-left: 10px;
+      color: #ff8b5f;
     }
     .blog-each .blog-each-top .blog-each-links a{
       margin-left: 10px;
     }
     .blog-each h2 {
       margin: 5px 0 0;
-      font-size: 18px;
+      font-size: 1.2rem;
     }
-    .blog-detail-page .blog-content {
-      font-size: 20px;
+    .blog-content {
+      font-size: 1.2rem;
+      line-height: 2em;
+      font-family: 'Noto Serif JP', serif;
     }
-    .blog-detail-page .ref-links a{
+    .created-edit-delete {
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .created-edit-delete p.user-and-date {
+      line-height: 60px;
+      margin: 0;
+      color: #949494;
+    }
+    .created-edit-delete .icons {
+      line-height: 60px;
+      margin: 0;
+    }
+    .created-edit-delete .icons a {
+      margin-left: 10px;
+      font-size: 1.5rem;
+    }
+    .ref-links a {
       display: inline-block;
-      margin: 30px 10px 0 0;
-      padding: 5px 10px;
-      box-shadow: 2px 2px 1px gray;
+      margin: 8px 10px 20px 0;
     }
-    .blog-detail-page .ref-links a:hover {
-      box-shadow: none;
+    .comment-area p.number-of-comments{
+      font-size: 1rem;
+      margin: 20px 0 8px;
     }
+    .comment-area p.number-of-comments span{
+      font-size: 1.2rem;
+    }
+    .comment-area form {
+      font-size: 0.9rem;
+    }
+    .comment-area form textarea#id_text{
+      height: 60px;
+      max-height: 200px;
+      min-width: 200px;
+    }
+    .comment-area .button{
+      margin: 0;
+    }
+    .comment-area .comment{
+      margin-top: 15px;
+    }
+    .comment-area span.user {
+      color: #949494;
+    }
+    .comment-area span.date {
+      color: #949494;
+      font-size: 0.8rem;
+    }
+    .comment-area .comment p {
+      font-size: 1rem;
+      margin: 0;
+    }
+
     .login, .register{
       color: #ff8b5f;
     }
-    .user-page .links{
+    ul.pagination {
+      padding: 20px 0 0 0;
       display: inline-block;
-      margin-bottom: 16px;
+    }
+    .class-base-pagination {
+        margin: 10px 0 0;
+    }
+    .search-form-row {
+      display: flex;
+      justify-content: space-between;
+      align-content: space-between;
+      flex-wrap: wrap;
+    }
+    .search-form-each label {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .search-form-each .search-form-food{
+      width: 160px;
+      box-sizing: border-box;
+    }
+    .search-form-each .search-form-date{
+      width: 90px;
+    }
+    .search-form-each .search-form-category{
+      width: 90px;
+    }
+    .search-form-row .search-button{
+      height: 40px;
+      margin: 20px 0;
+      width: 100%;
+    }
+    .search-form-each .search-form-keyword1{
+      width: 160px;
+      box-sizing: border-box;
+    }
+    .search-form-each .search-form-keyword2{
+      width: 160px;
+      box-sizing: border-box;
+    }
+    .search-form-each .search-form-keyword3{
+      width: 160px;
+      box-sizing: border-box;
+    }
+    .food-area{
+      margin-bottom: 50px;
+    }
+    .favorite-list {
+      margin-bottom: 30px;
+    }
+    .favorite-add-area {
+      border-top: 1px solid #c7c7c7;
+    }
+    .favorite-add-area h1 {
+      margin-top: 30px;
+    }
+    .alert {
+      color: #333;
+      background: #fafafa;
+      font-size: 1rem;
+      padding: 10px 0;
+      margin-bottom: 10px;
+      text-align: center;
     }
   </style>
 </head>

@@ -7,14 +7,15 @@
 </div>
 
 <div class="body-container">
+  {% include 'partials/_alerts.html' %}
   <form action="" method="post">
     {% csrf_token %}
-    <label>{{form.username.label}}</label>
-    {{ form.username }}
-    <label>{{form.password1.label}}</label>
-    {{ form.password1 }}
-    <label>{{form.password2.label}}</label>
-    {{ form.password2 }}
+    <label for='username'>ユーザー名</label>
+    <input type="text" name='username' required>
+    <label for='password'>パスワード</label>
+    <input type="password" name='password' required>
+    <label for='password2'>パスワード確認</label>
+    <input type="password" name='password2' required>
     <button class="button" type="submit">ユーザー登録</button>
   </form>
   

@@ -6,14 +6,11 @@
 <div class="header-bar">
   <div>
     <h1>筋肉、栄養学メモ</h1>
-    <h3 style="margin: 0;">今日は新しく<span style="color:#333;">{{ count }}</span>記事投稿されました！</h3>
+    <h3>今日は新しく<span> {{ count }} </span>記事投稿されました！</h3>
   </div>
-
-  {% if request.user.is_authenticated %}
-    <a href="{% url 'logout' %}" class="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Login</a>
-  {% endif %}
+  <div class="top-right-link">
+    <a href="{% url 'today_foods' %}"><i class="fas fa-home"></i>Home</a>
+  </div>
 </div>
 <!-- ///header-bar -->
 
@@ -24,8 +21,9 @@
       <div class="body-header-left">
         <h1>新着メモ</h1>
         <div class="links">
-          <a href="{% url 'today_foods' %}">今日食べたもの</a>
           <a href="{% url 'all_blogs' %}">全記事</a>
+          <a href="{% url 'my_blogs' %}">自分の記事</a>
+          <a href="{% url 'drafts' %}">下書き</a>
         </div>
       </div>
       <div class="body-header-right">
@@ -37,33 +35,30 @@
 
   <!-- 記事一覧 -->
   <div class="blog-body">
+
     {% if blogs %}
       {% for blog in blogs %}
+      {% if blog in today_created_blogs or blog in yes_created_blogs or blog in today_updated_blogs or blog in yes_updated_blogs %}
         <div class="blog-each">
           <div class="blog-each-top">
-            <p class="blog-left"><a href="{% url 'user_page' user.id %}">
+            <p class="blog-left">
               {% if request.user == blog.user %}
-                あなた
+                <a href="{% url 'dashboard' user.id %}">あなた</a>が{{blog.created}}に投稿<span class="blog-each-new">new!!</span>
               {% else %}
-                {{ blog.user }}
+                {{ blog.user }}が{{blog.created}}に投稿<span class="blog-each-new">new!!</span>
               {% endif %}
-              </a>が{{ blog.updated }}に投稿</p>
-            <!-- {% if blog.created == blog.updated %}
-              {{ blog.created }}に投稿</p>
-            {% else %}
-              {{ blog.updated }}に更新</p>
-            {% endif %}
-            {{ blog.created }}, {{ blog.updated }} -->
+            </p>
             <div class="blog-each-links">
-              <a href="{% url 'blog' blog.id %}" class="fas fa-info"></a>
-              {% if request.user == blog.user %}
+              <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
+              <!-- {% if request.user == blog.user %}
                 <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
                 <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
-              {% endif %}
+                {% endif %} -->
+              </div>
             </div>
+            <h2>{{ blog.title }}</h2>
           </div>
-          <h2>{{ blog.title }}</h2>
-        </div>
+          {% endif %}
       {% endfor %}
     {% else %}
       <p>書かれた記事はありません。</p>

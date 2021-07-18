@@ -12,53 +12,89 @@
   <!-- body-header-bar -->
   <div class="body-header">
     <h1>メモ一覧</h1>
-    <div class="p-over-search">
+    <div class="notion-sm">
       <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
-      <p>・日付は月-日で検索してください。</p> -->
-      <p>・ユーザー、日付、タイトルで検索できます。日付は月-日で検索してください。</p>
+        <p>・日付は月-日で検索してください。</p> -->
+      <p>※タイトル、コンテンツ、タグ、ユーザー名から検索します。</p>
     </div>
-    <form action="{% url 'blog_search_results' %}" method="get" style="margin-bottom: 20px;">
-      <input type="text" name="keywords" value='{{keywords}}' placeholder="例）筋トレ">
-      <button class="search-button" type="submit">検索</button>
+    <form class="search-form" action="{% url 'all_blogs_search' %}" method="get">
+      <div class="search-form-row">
+        <div class="search-form-each keyword1">
+          <label for="keyword1">キーワード１</label>
+          <input class="search-form-keyword1" type="text" name="keyword1" value='{{values.keyword1}}' placeholder="例）筋トレ">
+        </div>
+        
+        <div class="search-form-each keyword2">
+          <label for="keyword2">キーワード２</label>
+          <input class="search-form-keyword2" type="text" name="keyword2" value='{{values.keyword2}}' placeholder="例）糖質">
+        </div>
+
+        <div class="search-form-each keyword3">
+          <label for="keyword3">キーワード３</label>
+          <input class="search-form-keyword3" type="text" name="keyword3" value='{{values.keyword3}}' placeholder="例）protein">
+        </div>
+        <!-- <div class="search-form-each">
+          <label for="user-name">ユーザー名</label>
+          <select class="search-form-user-name" name="user-name" id="type">
+            <option selected='true'>なし</option>
+          </select>
+        </div> -->
+        
+      </div>
+      <div class="search-form-row">
+        <button class="search-button" type="submit">検索</button>
+      </div>
+
     </form>
   </div>
-  <!-- ///body-header-bar -->
+    <!-- ///body-header-bar -->
 
-  <!-- 記事一覧 -->
-  <div class="blog-body">
-
-
-    {% if blogs %}
-      {% for blog in blogs %}
-        <div class="blog-each">
-          <div class="blog-each-top">
-            <p class="blog-left"><a href="{% url 'user_page' user.id %}">
-              {% if request.user == blog.user %}
-                あなた
-              {% else %}
-                {{ blog.user }}
-              {% endif %}
-              </a>が{{ blog.updated }}に投稿</p>
-            <!-- {% if blog.created == blog.updated %}
-              {{ blog.created }}に投稿</p>
+<!-- 記事一覧 -->
+<div class="blog-body">
+  {% if blogs %}
+    {% for blog in blogs %}
+      <div class="blog-each">
+        <div class="blog-each-top">
+          <p class="blog-left">
+            {% if request.user == blog.user %}
+              <a href="{% url 'dashboard' user.id %}">あなた</a>が{{blog.created}}に投稿
             {% else %}
-              {{ blog.updated }}に更新</p>
+              {{ blog.user }}が{{blog.created}}に投稿
             {% endif %}
-            {{ blog.created }}, {{ blog.updated }} -->
-            <div class="blog-each-links">
-              <a href="{% url 'blog' blog.id %}" class="fas fa-info"></a>
-              {% if request.user == blog.user %}
-                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
-                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
-              {% endif %}
-            </div>
+            {% if blog in today_created_blogs or blog in yes_created_blogs or blog in today_updated_blogs or blog in yes_updated_blogs %}
+              <span class="blog-each-new">new!!</span>
+            {% endif %}
+          </p>
+          <div class="blog-each-links">
+            <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
+            <!-- {% if request.user == blog.user %}
+              <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+              <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+            {% endif %} -->
           </div>
-          <h2>{{ blog.title }}</h2>
         </div>
-      {% endfor %}
-    {% else %}
-      <p>書かれた記事はありません。</p>
-    {% endif %}
+        <h2>{{ blog.title }}</h2>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>書かれた記事はありません。</p>
+  {% endif %}
+</div>
+  
+  {% if is_paginated %}
+  <div class="pagination class-base-pagination">
+    <span class="page-links">
+      {% if page_obj.has_previous %}
+      <a href="/blogs/all_blogs?page={{ page_obj.previous_page_number }}">&laquo;</a>
+      {% endif %}
+      <span class="page-current">
+        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+      </span>
+      {% if page_obj.has_next %}
+      <a href="/blogs/all_blogs?page={{ page_obj.next_page_number }}">&raquo;</a>
+      {% endif %}
+    </span>
   </div>
+  {% endif %}
 </div>
 {% endblock %}

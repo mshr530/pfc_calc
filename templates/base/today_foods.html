@@ -3,26 +3,26 @@
 {% block title %}｜ホーム{% endblock %}
 {% block content %}
 
+
 <!-- header-bar -->
 <div class="header-bar">
   <div>
     <h1>ようこそ、{{ request.user | title }}</h1> 
-    <h3 style="margin: 0;">
+    <h3>
       今日は{% now "F" %}{% now "j" %}日({% now "l" %})
-      、合計カロリーは<span style="color: #333;">{{ttl_kcal}}</span>です！
+      、合計カロリーは<span> {{ttl_kcal}} </span>です！
     </h3>
   </div>
 
-  {% if request.user.is_authenticated %}
-    <a href="{% url 'logout' %}" class="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i>Login</a>
-  {% endif %}
+  <div class="top-right-link">
+    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+  </div>
 </div>
 <!-- ///header-bar -->
 
 <div class="body-container">
   <!-- body-header-bar -->
+  {% include 'partials/_alerts.html' %}
   <div class="body-header">
     <div class="body-header-title">
       <div class="body-header-left">
@@ -30,8 +30,9 @@
         <div class="links">
           <a href="{% url 'all_foods' %}">一覧</a>
           <a href="{% url 'target' %}">目標設定</a>
-          <a href="{% url 'latest_blogs' %}">ブログ</a>
-          <a href="{% url 'user_page' user.id %}">マイページ</a>
+          <a href="{% url 'favorite' %}">お気に入り</a>
+          <a href="{% url 'latest_blogs' %}">メモ</a>
+          <a href="{% url 'dashboard' user.id %}">マイページ</a>
         </div>
       </div>
       <div class="body-header-right">
@@ -54,60 +55,82 @@
         <th>カテゴリ</th>
       </tr>
       {% if user_foods %}
-        {% for food in user_breakfast_list %}
+        {% if user_breakfast_list %}
           <tr>
-            <td class="align-left">{{ food.name }}</td>
-            <td>{{ food.kcal }}</td>
-            <td>{{ food.protein }}</td>
-            <td>{{ food.fat }}</td>
-            <td>{{ food.carb }}</td>
-            <!-- <td>{{ food.eaten_date }}</td> -->
-            <td>{{ food.category }}</td>
-            <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <th class="align-left">朝食</th>
           </tr>
-        {% endfor %}
+          {% for food in user_breakfast_list %}
+            <tr>
+              <td class="align-left">{{ food.name }}</td>
+              <td>{{ food.kcal }}</td>
+              <td>{{ food.protein }}</td>
+              <td>{{ food.fat }}</td>
+              <td>{{ food.carb }}</td>
+              <!-- <td>{{ food.eaten_date }}</td> -->
+              <td>{{ food.category }}</td>
+              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
 
-        {% for food in user_lunch_list %}
+        {% if user_lunch_list %}
           <tr>
-            <td class="align-left">{{ food.name }}</td>
-            <td>{{ food.kcal }}</td>
-            <td>{{ food.protein }}</td>
-            <td>{{ food.fat }}</td>
-            <td>{{ food.carb }}</td>
-            <!-- <td>{{ food.eaten_date }}</td> -->
-            <td>{{ food.category }}</td>
-            <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <th class="align-left">昼食</th>
           </tr>
-        {% endfor %}
+          {% for food in user_lunch_list %}
+            <tr>
+              <td class="align-left">{{ food.name }}</td>
+              <td>{{ food.kcal }}</td>
+              <td>{{ food.protein }}</td>
+              <td>{{ food.fat }}</td>
+              <td>{{ food.carb }}</td>
+              <!-- <td>{{ food.eaten_date }}</td> -->
+              <td>{{ food.category }}</td>
+              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
 
-        {% for food in user_dinner_list %}
+        {% if user_dinner_list %}
           <tr>
-            <td class="align-left">{{ food.name }}</td>
-            <td>{{ food.kcal }}</td>
-            <td>{{ food.protein }}</td>
-            <td>{{ food.fat }}</td>
-            <td>{{ food.carb }}</td>
-            <!-- <td>{{ food.eaten_date }}</td> -->
-            <td>{{ food.category }}</td>
-            <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <th class="align-left">夕食</th>
           </tr>
-        {% endfor %}
+          {% for food in user_dinner_list %}
+            <tr>
+              <td class="align-left">{{ food.name }}</td>
+              <td>{{ food.kcal }}</td>
+              <td>{{ food.protein }}</td>
+              <td>{{ food.fat }}</td>
+              <td>{{ food.carb }}</td>
+              <!-- <td>{{ food.eaten_date }}</td> -->
+              <td>{{ food.category }}</td>
+              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
 
-        {% for food in user_snack_list %}
+
+
+        {% if user_snack_list %}
           <tr>
-            <td class="align-left">{{ food.name }}</td>
-            <td>{{ food.kcal }}</td>
-            <td>{{ food.protein }}</td>
-            <td>{{ food.fat }}</td>
-            <td>{{ food.carb }}</td>
-            <td>{{ food.category }}</td>
-            <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <th class="align-left">間食</th>
           </tr>
-        {% endfor %}
+          {% for food in user_snack_list %}
+            <tr>
+              <td class="align-left">{{ food.name }}</td>
+              <td>{{ food.kcal }}</td>
+              <td>{{ food.protein }}</td>
+              <td>{{ food.fat }}</td>
+              <td>{{ food.carb }}</td>
+              <td>{{ food.category }}</td>
+              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
 
         <!-- {% for food in user_foods %}
           <tr>
@@ -123,7 +146,7 @@
           </tr>
         {% endfor %} -->
       {% else %}
-        <td colspan="8" style="padding: 20px;">｜今日はまだ何も食べていません。｜</td>
+        <td colspan="8" class="no-results">｜今日はまだ何も食べていません。｜</td>
       {% endif %}
 
       <!-- 合計と目標 -->
@@ -155,7 +178,6 @@
   </div>
   <!-- ///table -->
 </div>
-
 
 <!-- {{ kcal.kcal__sum }}
   {{ protein.protein__sum }} -->
