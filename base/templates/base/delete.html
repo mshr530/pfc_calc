@@ -1,8 +1,0 @@
-<h1>削除</h1>
-<a href="{% url 'create' %}">追加</a>
-
-<form action="" method="post">
-  {% csrf_token %}
-  <p>本当にこの食べ物を削除しますか？｜{{food}}</p>
-  <button type="submit">削除</button>
-</form>

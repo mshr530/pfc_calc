@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block title %}｜{{ user }}{% endblock %}
+{% block content %}
+
+<!-- header-bar -->
+<div class="header-bar">
+  <div>
+    <h1>マイページ：{{ request.user | title }}</h1>
+  </div>
+  <div class="top-right-link">
+    <a href="{% url 'today_foods' %}"><i class="fas fa-home"></i>Home</a>
+  </div>
+</div>
+<!-- ///header-bar -->
+
+<div class="body-container user-page">
+  
+  <!-- food-area -->
+  <div class="food-area">
+    <div class="top">
+      <h2>直近のトータルカロリーとPFCバランス</h2>
+      <!-- <a href="">過去すべての推移</a> -->
+    </div>
+    
+    <div class="container">
+      <table>
+        <tr class="table-header">
+          <th class="align-left">日付</th>
+          <th>kcal</th>
+          <th>P</th>
+          <th>F</th>
+          <th>C</th>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_yest }}</td>
+          <td>{{ yest_k.kcal__sum }}</td>
+          <td>{{ yest_p.protein__sum }}</td>
+          <td>{{ yest_f.fat__sum }}</td>
+          <td>{{ yest_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_two_days_ago }}</td>
+          <td>{{ two_days_ago_k.kcal__sum }}</td>
+          <td>{{ two_days_ago_p.protein__sum }}</td>
+          <td>{{ two_days_ago_f.fat__sum }}</td>
+          <td>{{ two_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_three_days_ago }}</td>
+          <td>{{ three_days_ago_k.kcal__sum }}</td>
+          <td>{{ three_days_ago_p.protein__sum }}</td>
+          <td>{{ three_days_ago_f.fat__sum }}</td>
+          <td>{{ three_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_four_days_ago }}</td>
+          <td>{{ four_days_ago_k.kcal__sum }}</td>
+          <td>{{ four_days_ago_p.protein__sum }}</td>
+          <td>{{ four_days_ago_f.fat__sum }}</td>
+          <td>{{ four_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_five_days_ago }}</td>
+          <td>{{ five_days_ago_k.kcal__sum }}</td>
+          <td>{{ five_days_ago_p.protein__sum }}</td>
+          <td>{{ five_days_ago_f.fat__sum }}</td>
+          <td>{{ five_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_six_days_ago }}</td>
+          <td>{{ six_days_ago_k.kcal__sum }}</td>
+          <td>{{ six_days_ago_p.protein__sum }}</td>
+          <td>{{ six_days_ago_f.fat__sum }}</td>
+          <td>{{ six_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        <tr>
+          <td class="align-left">{{ html_seven_days_ago }}</td>
+          <td>{{ seven_days_ago_k.kcal__sum }}</td>
+          <td>{{ seven_days_ago_p.protein__sum }}</td>
+          <td>{{ seven_days_ago_f.fat__sum }}</td>
+          <td>{{ seven_days_ago_c.carb__sum }}</td>
+        </tr>
+
+        {% if target %}
+          <tr>
+            <th class="align-left">現在の目標</th>
+            <th>{{ target.kcal }}</th>
+            <th>{{ target.protein }}</th>
+            <th>{{ target.fat }}</th>
+            <th>{{ target.carb }}</th>
+          </tr>
+        {% else %}
+          <tr>
+            <th class="align-left">目標</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+          </tr>
+        {% endif %}
+      </table>
+    </div>
+  </div>
+  <!-- ///food-area -->
+
+  <!-- blog-area -->
+  <div class="blog-area">
+    <div class="top">
+      <h2>最新メモ</h2>
+    </div>
+    <!-- 記事一覧 -->
+    <div class="blog-body">
+      {% if user_blogs %}
+        {% for blog in user_blogs %}
+          <div class="blog-each">
+            <div class="blog-each-top">
+              <p class="blog-left">{{ blog.updated }}に投稿</p>
+              <div class="blog-each-links">
+                <!-- <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a> -->
+                <!-- {% if request.user == blog.user %}
+                  <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+                  <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+                {% endif %} -->
+              </div>
+            </div>
+            <h2>{{ blog.title }}</h2>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>{{ user }}の記事はありません。</p>
+      {% endif %}
+    </div>
+  </div>
+  <!-- ///blog-area -->
+
+</div>
+{% endblock %}

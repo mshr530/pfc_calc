@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}｜下書き{% endblock %}
+{% block content %}
+
+<!-- header-bar -->
+<div class="header-bar">
+  <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+</div>
+<!-- ///header-bar -->
+
+<div class="body-container">
+  <!-- body-header-bar -->
+  <div class="body-header">
+    <h1>下書き</h1>
+  </div>
+  <!-- ///body-header-bar -->
+
+  <!-- 記事一覧 -->
+  <div class="blog-body">
+    {% if user_drafts %}
+      {% for draft in user_drafts %}
+        <div class="blog-each">
+          <div class="blog-each-top">
+            <p class="blog-left">
+                {{ draft.created }}に作成
+            </p>
+            <div class="blog-each-links">
+              <a href="{% url 'blog' draft.id %}" class="fas fa-info-circle"></a>
+              <!-- {% if request.user == blog.user %}
+                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+              {% endif %} -->
+            </div>
+          </div>
+          <h2>{{ draft.title }}</h2>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>下書きはありません。</p>
+    {% endif %}
+  </div>
+
+  {% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="/dashboard/<int:pk>/all_blogs?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="/dashboard/<int:pk>/all_blogs?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

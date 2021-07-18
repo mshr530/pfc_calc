@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block title %}｜お気に入り登録{% endblock %}
+{% block content %}
+
+
+<div class="header-bar">
+  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <!-- お気に入り一覧 -->
+  <div class="favorite-list">
+    <div class="body-header">
+      <h1>お気に入り一覧</h1>
+    </div>
+    <!-- table -->
+    <div class="food-items-wrapper">
+      <table>
+        <tr class="table-header">
+          <th class="align-left">食べもの</th>
+          <th>kcal</th>
+          <th>P</th>
+          <th>F</th>
+          <th>C</th>
+          <!-- <th>カテゴリ</th> -->
+        </tr>
+        {% if favorites %}
+          {% if br_favs %}
+            <tr>
+              <th class="align-left">朝食</th>
+            </tr>
+            {% for br_fav in br_favs %}
+              <tr>
+                <td class="align-left">{{ br_fav.name }}</td>
+                <td>{{ br_fav.kcal }}</td>
+                <td>{{ br_fav.protein }}</td>
+                <td>{{ br_fav.fat }}</td>
+                <td>{{ br_fav.carb }}</td>
+                <!-- <td>{{ br_fav.category }}</td> -->
+                <td><a href="{% url 'favorite_update' br_fav.id %}"><i class="far fa-edit"></i></a></td>
+                <td><a href="{% url 'favorite_delete' br_fav.id %}"><i class="far fa-trash-alt"></i></a></td>
+                <td><a href="{% url 'add_to_today_foods' br_fav.id %}"><i class="fas fa-plus"></i></a></td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+          
+          {% if lu_favs %}
+            <tr>
+              <th class="align-left">昼食</th>
+            </tr>
+            {% for lu_fav in lu_favs %}
+              <tr>
+                <td class="align-left">{{ lu_fav.name }}</td>
+                <td>{{ lu_fav.kcal }}</td>
+                <td>{{ lu_fav.protein }}</td>
+                <td>{{ lu_fav.fat }}</td>
+                <td>{{ lu_fav.carb }}</td>
+                <!-- <td>{{ lu_fav.category }}</td> -->
+                <td><a href="{% url 'favorite_update' lu_fav.id %}"><i class="far fa-edit"></i></a></td>
+                <td><a href="{% url 'favorite_delete' lu_fav.id %}"><i class="far fa-trash-alt"></i></a></td>
+                <td><a href="{% url 'add_to_today_foods' lu_fav.id %}"><i class="fas fa-plus"></i></a></td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+
+          {% if di_favs %}
+          <tr class="category-title" >
+            <th colspan="8" class="align-left">夕食</th>
+          </tr>
+          {% for di_fav in di_favs %}
+            <tr>
+              <td class="align-left">{{ di_fav.name }}</td>
+              <td>{{ di_fav.kcal }}</td>
+              <td>{{ di_fav.protein }}</td>
+              <td>{{ di_fav.fat }}</td>
+              <td>{{ di_fav.carb }}</td>
+              <!-- <td>{{ di_fav.category }}</td> -->
+              <td><a href="{% url 'favorite_update' di_fav.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'favorite_delete' di_fav.id %}"><i class="far fa-trash-alt"></i></a></td>
+              <td><a href="{% url 'add_to_today_foods' di_fav.id %}"><i class="fas fa-plus"></i></a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+
+        {% if sn_favs %}
+        <tr>
+          <th class="align-left">間食</th>
+        </tr>
+        {% for sn_fav in sn_favs %}
+          <tr>
+            <td class="align-left">{{ sn_fav.name }}</td>
+            <td>{{ sn_fav.kcal }}</td>
+            <td>{{ sn_fav.protein }}</td>
+            <td>{{ sn_fav.fat }}</td>
+            <td>{{ sn_fav.carb }}</td>
+            <!-- <td>{{ sn_fav.category }}</td> -->
+            <td><a href="{% url 'favorite_update' sn_fav.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'favorite_delete' sn_fav.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <td><a href="{% url 'add_to_today_foods' sn_fav.id %}"><i class="fas fa-plus"></i></a></td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+        {% else %}
+          <td colspan="8" class="no-results">｜お気に入り登録された食べものはありません。｜</td>
+        {% endif %}
+      </table>
+    </div>
+  </div>
+  <!-- お気に入り追加エリア -->
+  <div class="favorite-add-area">
+    <div class="body-header">
+      <h1>お気に入り登録</h1>
+    </div>
+    <div class="notion2">
+      <p>※数字は半角で打ち込んでください</p>
+    </div>
+    <form action="{% url 'favorite' %}" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="button" type="submit">追加</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

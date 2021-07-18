@@ -1,7 +1,0 @@
-<h3>Food Form</h3>
-<a href="{% url 'foods' %}">戻る</a>
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">追加</button>
-</form>

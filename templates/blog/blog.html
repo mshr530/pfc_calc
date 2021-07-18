@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}｜{{ blog.title }}{% endblock %}
+{% block content %}
+
+
+<div class="header-bar">
+  <a href="{% url 'latest_blogs' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <div class="created-edit-delete">
+    <p class="user-and-date">
+      {% if request.user == blog.user %}
+        <a href="{% url 'dashboard' user.id %}">あなた</a>が{{ blog.created }}に作成</p>
+      {% else %}
+        {{ blog.user }}が{{ blog.created }}に作成</p>
+      {% endif %}
+    <div class="icons">
+      {% if request.user == blog.user %}
+        <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
+        <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+      {% endif %}
+    </div>
+  </div>
+
+  <h1>{{ blog.title }}</h1>
+  <p class="blog-content">{{ blog.content_1 }}</p>
+  {% if blog.content_2 %}
+    <p class="blog-content">{{ blog.content_2 }}</p>
+  {% endif %}
+  {% if blog.content_2 %}
+    <p class="blog-content">{{ blog.content_3 }}</p>
+  {% endif %}
+
+  <div class="ref-links">
+    {% if link_1 %}
+      <a class="button" href="{{ blog.link_1 }}">参考リンク</a>
+    {% endif %}
+    {% if link_2 %}
+      <a class="button" href="{{ blog.link_2 }}">参考リンク</a>
+    {% endif %}
+  </div>
+
+  
+  <div class="comment-area">
+    <hr>
+    <p class="number-of-comments"><span>{{ number_of_comments }}</span>件のコメント</p>
+    <div class="comment-form">
+      <form action="{% url 'blog' blog.id %}" method="post">
+        {% csrf_token %}
+        {{ form.text }}
+        <button type="submit" class="button">コメント</button>
+      </form>
+    </div>
+    <div class="comment-all">
+      {% if comments %}
+        {% for comment in comments %}
+          <div class="comment">
+            <div class="comment-left">
+              <span class="user">{{ comment.user }}</span>
+              <span class="date">{{ comment.created|timesince }}前</span>
+              <p>{{ comment.text|linebreaks }}</p>
+            </div>
+            <div class="comment-right">
+              {% if request.user == blog.user %}
+                <a href="{% url 'comment_update' blog.id comment.id %}" class="far fa-edit"></a>
+                <a href="{% url 'comment_delete' blog.id comment.id %}" class="far fa-trash-alt"></a>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
