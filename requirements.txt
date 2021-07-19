@@ -1,0 +1,7 @@
+Django==3.1.7
+django-taggit==1.4.0
+Pillow @ file:///opt/concourse/worker/volumes/live/991b9a87-3372-4acd-45f9-eaa52701f03c/volume/pillow_1603822262543/work
+Pillow==5.2.0
+psycopg2-binary==2.8.6
+psycopg2==2.7.5
+pytz==2020.1
