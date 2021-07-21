@@ -57,54 +57,56 @@
     </form>
   </div>
 
-  <table>
-    <tr class="table-header">
-      <th class="align-left">食べもの</th>
-      <th>kcal</th>
-      <th>P</th>
-      <th>F</th>
-      <th>C</th>
-      <th>日付</th>
-      <th>種類</th>
-    </tr>
-    {% if foods %}
-      {% for food in foods %}
-      <tr>
-        <td class="align-left all-foods-data">{{ food.name }}</td>
-        <td>{{ food.kcal }}</td>
-        <td>{{ food.protein }}</td>
-        <td>{{ food.fat }}</td>
-        <td>{{ food.carb }}</td>
-        <td>{{ food.eaten_date }}</td>
-        <td>{{ food.category }}</td>
-        <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-        <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+  <div class="food-items-wrapper">
+    <table>
+      <tr class="table-header">
+        <th class="align-left">食べもの</th>
+        <th>kcal</th>
+        <th>P</th>
+        <th>F</th>
+        <th>C</th>
+        <th>日付</th>
+        <th>種類</th>
       </tr>
-      {% endfor %}
-    {% else %}
-    <td colspan="8" class="no-results">｜食べ物なし｜</td>
-    {% endif %}
-    
-  </table>
-  {% if is_paginated %}
+      {% if foods %}
+      {% for food in foods %}
+        <tr>
+          <td class="align-left all-foods-data">{{ food.name }}</td>
+          <td>{{ food.kcal }}</td>
+          <td>{{ food.protein }}</td>
+          <td>{{ food.fat }}</td>
+          <td>{{ food.carb }}</td>
+          <td>{{ food.eaten_date }}</td>
+          <td>{{ food.category }}</td>
+          <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
+          <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <td colspan="8" class="no-results">｜食べ物なし｜</td>
+      {% endif %}
+      
+    </table>
+    {% if is_paginated %}
     <div class="pagination class-base-pagination">
-      <span class="page-links">
-        {% if page_obj.has_previous %}
+        <span class="page-links">
+          {% if page_obj.has_previous %}
           <a href="/all_foods?page={{ page_obj.previous_page_number }}">&laquo;</a>
-        {% endif %}
-        <span class="page-current">
-          {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-        </span>
-        {% if page_obj.has_next %}
+          {% endif %}
+          <span class="page-current">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+          {% if page_obj.has_next %}
           <a href="/all_foods?page={{ page_obj.next_page_number }}">&raquo;</a>
-        {% endif %}
-      </span>
+          {% endif %}
+        </span>
+      </div>
+      {% endif %}
     </div>
-  {% endif %}
-</div>
+  </div>
 <!-- {{ color }} -->
 <!-- {{ kcal.kcal__sum }}
   {{ protein.protein__sum }} -->
   
-
+  
 {% endblock %}
