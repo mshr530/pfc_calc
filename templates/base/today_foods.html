@@ -7,7 +7,7 @@
 <!-- header-bar -->
 <div class="header-bar">
   <div>
-    <h1>ようこそ、{{ request.user | title }}</h1> 
+    <h1>ようこそ、{{ request.user }}</h1> 
     <h3>
       今日は{% now "F" %}{% now "j" %}日({% now "l" %})
       、合計カロリーは<span> {{ttl_kcal}} </span>です！

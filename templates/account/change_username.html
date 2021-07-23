@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}｜ユーザー名変更{% endblock %}
+{% block content %}
+
+<div class="header-bar">
+  <a href="{% url 'dashboard' user.id %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <div class="body-header">
+    <h1>ユーザー名変更</h1>
+  </div>
+  {% include 'partials/_alerts.html' %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <label for='old_username'>旧ユーザー名</label>
+    <input type="text" name='old_username' value="{{ request.user.username }}" required>
+    <label for='new_username'>新ユーザー名</label>
+    <input type="text" name='new_username' required>
+    <label for='password'>変更するためにパスワードが必要です</label>
+    <input type="password" name='password' required>
+    <button class="button" type="submit">変更</button>
+  </form>
+  
+</div>
+{% endblock %}
