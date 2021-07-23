@@ -7,6 +7,7 @@ urlpatterns = [
   path('', views.foods, name='today_foods'),
   path('all_foods', FoodList.as_view(), name='all_foods'),
   path('all_foods/search/', views.food_search, name='food_search'),
+  # path('change_number_of_foods', views.change_number_of_foods, name='change_number_of_foods'),
   path('favorite', views.favorite, name='favorite'),
   path('favorite/delete/<int:pk>', views.favorite_delete, name='favorite_delete'),
   path('favorite/update/<int:pk>', views.favorite_update, name='favorite_update'),

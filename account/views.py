@@ -243,3 +243,46 @@ def dashboard(request, pk):
     'target':target,
   }
   return render(request, 'account/dashboard.html', context)
+
+def change_username(request, pk):
+  user = get_object_or_404(User, pk =pk)
+  context = {
+    'user': user
+  }
+  if request.method == 'POST':
+    old_username = request.POST['old_username']
+    new_username = request.POST['new_username']
+    password = request.POST['password']
+
+    user = auth.authenticate(username=old_username, password=password)
+    if user is not None:
+      user.username = new_username
+      user.save()
+      messages.success(request, 'ユーザー名を変更しました')
+      return redirect('login')
+    else:
+      messages.error(request, '※旧ユーザー名、またはパスワードが間違っています')
+      return render(request, 'account/change_username.html', context)
+  else:
+    return render(request, 'account/change_username.html', context)
+
+# def change_password(request, pk):
+#   user = get_object_or_404(User, pk =pk)
+#   context = {
+#     'user': user
+#   }
+#   if request.method == 'POST':
+#     old_password = request.POST['old_password']
+#     new_password = request.POST['new_password']
+#     new_password2 = request.POST['new_password2']
+#     # Check if passwords match
+#     if new_password == new_password2:
+#       user.password = new_password
+#       user.save()
+#       messages.success(request, 'パスワードを変更しました')
+#       return redirect('login')
+#     else:
+#       messages.error(request, '※パスワードが一致していません')
+#       return render(request, 'account/change_password.html', context)
+#   else:
+#     return render(request, 'account/change_password.html', context)

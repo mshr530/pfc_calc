@@ -7,6 +7,8 @@ urlpatterns = [
   # path('logout', LogoutView.as_view(next_page='login'), name='logout'),
   # path('register', RegisterPage.as_view(), name='register'),
   # path('dashboard/<int:pk>', views.dashboard, name='dashboard'),
+  path('change_username/<int:pk>', views.change_username, name='change_username'),
+  # path('change_password/<int:pk>', views.change_password, name='change_password'),
   path('register', views.register, name='register'),
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),

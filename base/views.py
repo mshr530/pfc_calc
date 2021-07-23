@@ -68,7 +68,10 @@ class FoodList(LoginRequiredMixin, ListView):
   template_name = 'base/all_foods.html'
   context_object_name = 'foods'
   ordering = ('-created')
-  paginate_by = 20
+  paginate_by = 100
+  # def get(self, request, *args, **kwargs):
+  #   paginate_by = request.GET.get('number-of-foods')
+  #   return paginate_by
   # BlogListと違って、自分の食べ物を表示
   def get_queryset(self):
     queryset = super().get_queryset().filter(user=self.request.user)
@@ -130,6 +133,10 @@ def food_search(request):
   }
 
   return render(request, 'base/all_foods.html', context)
+
+# def change_number_of_foods(request):
+#   pass
+
 
 class TargetCreate(LoginRequiredMixin, CreateView):
   template_name = 'base/target.html'

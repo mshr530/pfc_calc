@@ -87,8 +87,9 @@
       {% endif %}
       
     </table>
+
     {% if is_paginated %}
-    <div class="pagination class-base-pagination">
+      <div class="pagination class-base-pagination">
         <span class="page-links">
           {% if page_obj.has_previous %}
           <a href="/all_foods?page={{ page_obj.previous_page_number }}">&laquo;</a>
@@ -100,8 +101,12 @@
           <a href="/all_foods?page={{ page_obj.next_page_number }}">&raquo;</a>
           {% endif %}
         </span>
+        <!-- <div class="number-of-foods">
+          <label for="number-of-foods">表示数を変更</label>
+          <input type="number" name="number-of-foods" id="number-of-foods" value="{paginate_by}">
+        </div> -->
       </div>
-      {% endif %}
+    {% endif %}
     </div>
   </div>
 <!-- {{ color }} -->
