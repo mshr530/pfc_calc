@@ -29,7 +29,6 @@
         <h1>今日食べたもの</h1>
         <div class="links">
           <a href="{% url 'all_foods' %}">一覧</a>
-          <a href="{% url 'target' %}">目標設定</a>
           <a href="{% url 'favorite' %}">お気に入り</a>
           <a href="{% url 'latest_blogs' %}">メモ</a>
           <a href="{% url 'dashboard' user.id %}">マイページ</a>
@@ -158,23 +157,22 @@
         <th class="total">{{ ttl_fat }}</th>
         <th class="total">{{ ttl_carb }}</th>
       </tr>
-      {% if target %}
-        <tr>
-          <th class="align-left">目標</th>
+      <tr>
+        <th class="align-left">目標</th>
+        {% if target %}
           <th>{{ target.kcal }}</th>
           <th>{{ target.protein }}</th>
           <th>{{ target.fat }}</th>
           <th>{{ target.carb }}</th>
-        </tr>
-      {% else %}
-        <tr>
+        {% else %}
           <th class="align-left">目標</th>
           <th>0</th>
           <th>0</th>
           <th>0</th>
           <th>0</th>
-        </tr>
-      {% endif %}
+        {% endif %}
+        <a href="{% url 'target' %}">目標設定</a>
+      </tr>
     </table>
   </div>
   <!-- ///table -->
