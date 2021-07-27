@@ -4,11 +4,11 @@
 
 <!-- header-bar -->
 <div class="header-bar">
-  <div>
-    <h1>マイページ：<a href="{% url 'change_username' user.id %}">{{ request.user }}</a></h1>
-  </div>
   <div class="top-right-link">
     <a href="{% url 'today_foods' %}"><i class="fas fa-home"></i>Home</a>
+  </div>
+  <div class="header-bar-main-msg">
+    <h1>マイページ：<a href="{% url 'change_username' user.id %}">{{ request.user }} <i style="font-size: 1rem;" class="far fa-edit"></i></a></h1>
   </div>
 </div>
 <!-- ///header-bar -->

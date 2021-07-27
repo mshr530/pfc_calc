@@ -27,12 +27,12 @@ def index(request):
   
   blogs = Blog.objects.order_by('-updated').filter(is_public='公開')[:10]
 
-  print(f'today -> {today}')
-  print(f'yesterday -> {yesterday}')
+  # print(f'today -> {today}')
+  # print(f'yesterday -> {yesterday}')
   # print(f'today_blogs -> {today_blogs}')
   # print(f'yesterday_blogs -> {yesterday_blogs}')
-  print(f'blogs -> {blogs}')
-  print(f'today blogs -> {count}')
+  # print(f'blogs -> {blogs}')
+  # print(f'today blogs -> {count}')
 
   context = {
     'blogs': blogs,
