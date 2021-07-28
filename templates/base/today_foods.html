@@ -6,17 +6,19 @@
 
 <!-- header-bar -->
 <div class="header-bar">
-  <div>
+  <div class="top-right-link">
+    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+  </div>
+  <div class="header-bar-main-msg">
     <h1>ようこそ、{{ request.user }}</h1> 
+  </div>
+  <div class="header-bar-bottom-msg">
     <h3>
       今日は{% now "F" %}{% now "j" %}日({% now "l" %})
       、合計カロリーは<span> {{ttl_kcal}} </span>です！
     </h3>
   </div>
 
-  <div class="top-right-link">
-    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
-  </div>
 </div>
 <!-- ///header-bar -->
 
@@ -27,17 +29,16 @@
     <div class="body-header-title">
       <div class="body-header-left">
         <h1>今日食べたもの</h1>
-        <div class="links">
-          <a href="{% url 'all_foods' %}">一覧</a>
-          <a href="{% url 'target' %}">目標設定</a>
-          <a href="{% url 'favorite' %}">お気に入り</a>
-          <a href="{% url 'latest_blogs' %}">メモ</a>
-          <a href="{% url 'dashboard' user.id %}">マイページ</a>
-        </div>
       </div>
       <div class="body-header-right">
         <a href="{% url 'food-create' %}"><i class="fas fa-plus"></i></a>
       </div>
+    </div>
+    <div class="links">
+      <a href="{% url 'all_foods' %}">一覧</a>
+      <a href="{% url 'favorite' %}">お気に入り</a>
+      <a href="{% url 'latest_blogs' %}">メモ</a>
+      <a href="{% url 'dashboard' user.id %}">マイページ</a>
     </div>
   </div>
   <!-- ///body-header-bar -->
@@ -57,7 +58,7 @@
       {% if user_foods %}
         {% if user_breakfast_list %}
           <tr>
-            <th class="align-left">朝食</th>
+            <th class="align-left">朝</th>
           </tr>
           {% for food in user_breakfast_list %}
             <tr>
@@ -76,7 +77,7 @@
 
         {% if user_lunch_list %}
           <tr>
-            <th class="align-left">昼食</th>
+            <th class="align-left">昼</th>
           </tr>
           {% for food in user_lunch_list %}
             <tr>
@@ -95,7 +96,7 @@
 
         {% if user_dinner_list %}
           <tr>
-            <th class="align-left">夕食</th>
+            <th class="align-left">夕</th>
           </tr>
           {% for food in user_dinner_list %}
             <tr>
@@ -116,7 +117,7 @@
 
         {% if user_snack_list %}
           <tr>
-            <th class="align-left">間食</th>
+            <th class="align-left">間</th>
           </tr>
           {% for food in user_snack_list %}
             <tr>
@@ -158,23 +159,22 @@
         <th class="total">{{ ttl_fat }}</th>
         <th class="total">{{ ttl_carb }}</th>
       </tr>
-      {% if target %}
-        <tr>
-          <th class="align-left">目標</th>
+      <tr>
+        <th class="align-left">目標</th>
+        {% if target %}
           <th>{{ target.kcal }}</th>
           <th>{{ target.protein }}</th>
           <th>{{ target.fat }}</th>
           <th>{{ target.carb }}</th>
-        </tr>
-      {% else %}
-        <tr>
+        {% else %}
           <th class="align-left">目標</th>
           <th>0</th>
           <th>0</th>
           <th>0</th>
           <th>0</th>
-        </tr>
-      {% endif %}
+        {% endif %}
+        <th colspan="2"><a href="{% url 'target' %}">設定</a></th>
+      </tr>
     </table>
   </div>
   <!-- ///table -->

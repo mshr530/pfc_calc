@@ -252,17 +252,22 @@ def change_username(request, pk):
   if request.method == 'POST':
     old_username = request.POST['old_username']
     new_username = request.POST['new_username']
+    new_username2 = request.POST['new_username2']
     password = request.POST['password']
 
     user = auth.authenticate(username=old_username, password=password)
-    if user is not None:
-      user.username = new_username
-      user.save()
-      messages.success(request, 'ユーザー名を変更しました')
-      return redirect('login')
-    else:
-      messages.error(request, '※旧ユーザー名、またはパスワードが間違っています')
+    if new_username != new_username2:
+      messages.error(request, '※新ユーザー名が一致していません')
       return render(request, 'account/change_username.html', context)
+    else:
+      if user is not None:
+        user.username = new_username
+        user.save()
+        messages.success(request, 'ユーザー名を変更しました')
+        return redirect('login')
+      else:
+        messages.error(request, '※旧ユーザー名、またはパスワードが間違っています')
+        return render(request, 'account/change_username.html', context)
   else:
     return render(request, 'account/change_username.html', context)
 

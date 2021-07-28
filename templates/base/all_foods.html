@@ -25,18 +25,18 @@
         </div>
         
         <div class="search-form-each">
-          <label for="date">日付</label>
+          <label for="date">日</label>
           <input class="search-form-date" type="text" name="date" value='{{values.date}}' placeholder="例）6-24">
         </div>
 
         <div class="search-form-each">
-          <label for="category">カテゴリ</label>
+          <label for="category">時</label>
           <select class="search-form-category" name="category" id="type" >
             <!-- <option value='なし'>なし</option>
-            <option value='朝食'>朝食</option>
-            <option value='昼食'>昼食</option>
-            <option value='夕食'>夕食</option>
-            <option value='間食'>間食</option> -->
+            <option value='朝'>朝</option>
+            <option value='昼'>昼</option>
+            <option value='夕'>夕</option>
+            <option value='間'>間</option> -->
             {% for k, v in category_choices.items %}
               <option value="{{ k }}" 
                 {% if k == values.category %}
@@ -64,8 +64,8 @@
         <th>P</th>
         <th>F</th>
         <th>C</th>
-        <th>日付</th>
-        <th>種類</th>
+        <th>日</th>
+        <th>時</th>
       </tr>
       {% if foods %}
       {% for food in foods %}
