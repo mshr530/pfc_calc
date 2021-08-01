@@ -19,6 +19,7 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button class="button" type="submit">更新</button>
+    <a class='button button-delete' href="{% url 'food_delete' food.id %}">削除</a>
   </form>
 </div>
 {% endblock %}
