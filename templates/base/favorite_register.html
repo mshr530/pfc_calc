@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}｜お気に入り登録{% endblock %}
+{% block content %}
+
+
+<div class="header-bar">
+  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+</div>
+
+<div class="body-container">
+  <!-- お気に入り追加エリア -->
+  <div class="favorite-add-area">
+    <div class="body-header">
+      <h1>お気に入り登録</h1>
+    </div>
+    <div class="notion2">
+      <p>※数字は半角で打ち込んでください</p>
+    </div>
+    <form action="{% url 'favorite' %}" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="button" type="submit">追加</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

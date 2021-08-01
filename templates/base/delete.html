@@ -2,10 +2,10 @@
 {% block title %}｜削除: {{ food.name }}{% endblock %}
 {% block content %}
 
-<section class="food-delete">
+<section class="food_delete">
   
   <div class="header-bar">
-    <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+    <a href="{% url 'food_update' food.id %}">&#8592; 戻る</a>
   </div>
   
   <div class="body-container">
@@ -18,7 +18,7 @@
       <p class="form-txt">本当にこの食べ物を削除しますか？</p>
       <h3 class="form-bld-txt">{{food.name}} ({{food.kcal}}kcal, {{food.protein}}P, {{food.fat}}F, {{food.carb}}C)</h3>
       
-      <button class="button" type="submit">削除</button>
+    <button class='button button-delete' href="{% url 'food_delete' food.id %}">削除</button>
     </form>
   </div>
 

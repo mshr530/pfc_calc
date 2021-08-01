@@ -31,7 +31,7 @@
         <h1>今日食べたもの</h1>
       </div>
       <div class="body-header-right">
-        <a href="{% url 'food-create' %}"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'food_create' %}"><i class="fas fa-plus"></i></a>
       </div>
     </div>
     <div class="links">
@@ -62,15 +62,15 @@
           </tr>
           {% for food in user_breakfast_list %}
             <tr>
-              <td class="align-left">{{ food.name }}</td>
+              <td class="align-left"><a href="{% url 'food_update' food.id %}">{{ food.name }}</a></td>
               <td>{{ food.kcal }}</td>
               <td>{{ food.protein }}</td>
               <td>{{ food.fat }}</td>
               <td>{{ food.carb }}</td>
               <!-- <td>{{ food.eaten_date }}</td> -->
               <!-- <td>{{ food.category }}</td> -->
-              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+              <!-- <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td> -->
             </tr>
           {% endfor %}
         {% endif %}
@@ -81,15 +81,15 @@
           </tr>
           {% for food in user_lunch_list %}
             <tr>
-              <td class="align-left">{{ food.name }}</td>
+              <td class="align-left"><a href="{% url 'food_update' food.id %}">{{ food.name }}</a></td>
               <td>{{ food.kcal }}</td>
               <td>{{ food.protein }}</td>
               <td>{{ food.fat }}</td>
               <td>{{ food.carb }}</td>
               <!-- <td>{{ food.eaten_date }}</td> -->
               <!-- <td>{{ food.category }}</td> -->
-              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+              <!-- <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td> -->
             </tr>
           {% endfor %}
         {% endif %}
@@ -100,15 +100,15 @@
           </tr>
           {% for food in user_dinner_list %}
             <tr>
-              <td class="align-left">{{ food.name }}</td>
+              <td class="align-left"><a href="{% url 'food_update' food.id %}">{{ food.name }}</a></td>
               <td>{{ food.kcal }}</td>
               <td>{{ food.protein }}</td>
               <td>{{ food.fat }}</td>
               <td>{{ food.carb }}</td>
               <!-- <td>{{ food.eaten_date }}</td> -->
               <!-- <td>{{ food.category }}</td> -->
-              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+              <!-- <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td> -->
             </tr>
           {% endfor %}
         {% endif %}
@@ -121,15 +121,15 @@
           </tr>
           {% for food in user_snack_list %}
             <tr>
-              <td class="align-left">{{ food.name }}</td>
+              <td class="align-left"><a href="{% url 'food_update' food.id %}">{{ food.name }}</a></td>
               <td>{{ food.kcal }}</td>
               <td>{{ food.protein }}</td>
               <td>{{ food.fat }}</td>
               <td>{{ food.carb }}</td>
               <!-- <td>{{ food.eaten_date }}</td> -->
               <!-- <td>{{ food.category }}</td> -->
-              <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-              <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+              <!-- <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+              <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td> -->
             </tr>
           {% endfor %}
         {% endif %}
@@ -143,12 +143,12 @@
             <td>{{ food.carb }}</td>
             <td>{{ food.eaten_date }}</td>
             <td>{{ food.category }}</td>
-            <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+            <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
           </tr>
         {% endfor %} -->
       {% else %}
-        <td colspan="8" class="no-results">｜今日はまだ何も食べていません。｜</td>
+        <td colspan="8" class="no-results">｜今日はまだ何も食べていません｜</td>
       {% endif %}
 
       <!-- 合計と目標 -->
@@ -160,7 +160,7 @@
         <th class="total">{{ ttl_carb }}</th>
       </tr>
       <tr>
-        <th class="align-left">目標</th>
+        <th class="align-left"><a href="{% url 'target' %}">目標</a></th>
         {% if target %}
           <th>{{ target.kcal }}</th>
           <th>{{ target.protein }}</th>
@@ -172,7 +172,7 @@
           <th>0</th>
           <th>0</th>
         {% endif %}
-        <th colspan="2"><a href="{% url 'target' %}">設定</a></th>
+        <!-- <th colspan="2"><a href="{% url 'target' %}">設定</a></th> -->
       </tr>
     </table>
   </div>

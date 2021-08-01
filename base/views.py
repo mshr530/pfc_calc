@@ -21,7 +21,7 @@ from .forms import FoodForm, FavoriteForm
 
 
 @login_required
-def foods(request):
+def today_foods(request):
     today = datetime.today()
     # foods = Food.objects.filter(eaten_date=today)
     user_foods = Food.objects.order_by(
@@ -165,15 +165,7 @@ class TargetCreate(LoginRequiredMixin, CreateView):
 
 
 def favorite(request):
-    if request.method == 'GET':
-        form = FavoriteForm()
-    elif request.method == 'POST':
-        form = FavoriteForm(request.POST)
-        if form.is_valid():
-            favorite = form.save(commit=False)
-            favorite.user = request.user
-            favorite.save()
-            form = FavoriteForm()
+
     favorites = Favorite.objects.all().filter(user=request.user)
     br_favs = favorites.filter(category='朝')
     lu_favs = favorites.filter(category='昼')
@@ -182,7 +174,6 @@ def favorite(request):
     number_of_favorites = favorites.count()
 
     context = {
-        'form': form,
         'favorites': favorites,
         'br_favs': br_favs,
         'lu_favs': lu_favs,
@@ -192,7 +183,20 @@ def favorite(request):
     }
     return render(request, 'base/favorite.html', context)
 
-
+def favorite_register(request):
+    if request.method == 'GET':
+        form = FavoriteForm()
+    elif request.method == 'POST':
+        form = FavoriteForm(request.POST)
+        if form.is_valid():
+            favorite = form.save(commit=False)
+            favorite.user = request.user
+            favorite.save()
+            form = FavoriteForm()
+    context = {
+        'form': form, 
+    }
+    return render(request, 'base/favorite_register.html', context)
 def favorite_delete(request, pk):
     favorite = get_object_or_404(Favorite, pk=pk)
     if request.method == 'POST':
@@ -277,3 +281,4 @@ class FoodDelete(LoginRequiredMixin, DeleteView):
     model = Food
     context_object_name = 'food'
     success_url = reverse_lazy('today_foods')
+

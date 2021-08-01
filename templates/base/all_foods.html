@@ -70,15 +70,15 @@
       {% if foods %}
       {% for food in foods %}
         <tr>
-          <td class="align-left all-foods-data">{{ food.name }}</td>
+          <td class="align-left all-foods-data"><a href="{% url 'food_update' food.id %}">{{ food.name }}</a></td>
           <td>{{ food.kcal }}</td>
           <td>{{ food.protein }}</td>
           <td>{{ food.fat }}</td>
           <td>{{ food.carb }}</td>
           <td>{{ food.eaten_date }}</td>
           <td>{{ food.category }}</td>
-          <td><a href="{% url 'food-update' food.id %}"><i class="far fa-edit"></i></a></td>
-          <td><a href="{% url 'food-delete' food.id %}"><i class="far fa-trash-alt"></i></a></td>
+          <!-- <td><a href="{% url 'food_update' food.id %}"><i class="far fa-edit"></i></a></td>
+          <td><a href="{% url 'food_delete' food.id %}"><i class="far fa-trash-alt"></i></a></td> -->
         </tr>
         {% endfor %}
         {% else %}
