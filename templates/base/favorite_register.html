@@ -4,7 +4,7 @@
 
 
 <div class="header-bar">
-  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+  <a href="{% url 'favorite' %}">&#8592; 戻る</a>
 </div>
 
 <div class="body-container">
@@ -16,7 +16,7 @@
     <div class="notion2">
       <p>※数字は半角で打ち込んでください</p>
     </div>
-    <form action="{% url 'favorite' %}" method="post">
+    <form action="{% url 'favorite_register' %}" method="post">
       {% csrf_token %}
       {{ form }}
       <button class="button" type="submit">追加</button>

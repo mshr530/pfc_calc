@@ -193,10 +193,12 @@ def favorite_register(request):
             favorite.user = request.user
             favorite.save()
             form = FavoriteForm()
+            return redirect('favorite')
     context = {
         'form': form, 
     }
     return render(request, 'base/favorite_register.html', context)
+
 def favorite_delete(request, pk):
     favorite = get_object_or_404(Favorite, pk=pk)
     if request.method == 'POST':
