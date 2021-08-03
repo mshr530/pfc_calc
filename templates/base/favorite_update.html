@@ -18,7 +18,7 @@
 <form action="{% url 'favorite_update' favorite.id %}" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button class="button" type="submit">更新</button>
+  <button class="button button-with-delete" type="submit">更新</button>
   <a class='button button-delete' href="{% url 'favorite_delete' favorite.id %}">削除</a>
 </form>
 
