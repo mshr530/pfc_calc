@@ -13,8 +13,8 @@
     <div class="body-header">
       <h1>お気に入り登録</h1>
     </div>
-    <div class="notion2">
-      <p>※数字は半角で打ち込んでください</p>
+    <div class="notion-md">
+      <p>数字は半角で、PFCのみ小数点第一位まで可</p>
     </div>
     <form action="{% url 'favorite_register' %}" method="post">
       {% csrf_token %}

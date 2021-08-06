@@ -14,7 +14,7 @@
   <form action="" method="post">
     {% csrf_token %}
     <label for='old_username'>旧ユーザー名</label>
-    <input type="text" name='old_username' value="{{ request.user.username }}" required>
+    <input disabled type="text" name='old_username' value="{{ request.user.username }}" required>
     <label for='new_username'>新ユーザー名</label>
     <input type="text" name='new_username' required>
     <label for='new_username2'>新ユーザー名（確認）</label>
