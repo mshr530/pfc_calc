@@ -52,6 +52,9 @@
       border-radius: 5px 5px 0 0;
       background: linear-gradient(90deg, #FFC107 0%,  #ff8b5f 40%, #ff8b5f 100%);
     }
+    .header-bar h1.login-h1{
+      margin: 0;
+    }
     .header-bar .top-right-link{
       display: flex;
       justify-content: flex-end;
@@ -91,12 +94,10 @@
       margin-bottom: 30px;
     }
     .body-header-title {
+      height: 46px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-    .body-header-title.favorite {
-      margin-bottom: 30px;
     }
     .body-container .body-header-left h1 {
       margin: 0px;
@@ -218,13 +219,9 @@
     .no-results {
       padding: 20px;
     }
-
-    .notion-sm p{
-      margin: 10px 0 0;
-      font-size: 0.8rem;
-    }
     .notion-md p {
       margin: 10px 0 0;
+      text-decoration: underline;
     }
     
     .search-button {
@@ -255,18 +252,18 @@
       font-size: 0.9rem;
     }
     .blog-each {
-      padding: 16px 0;
+      padding: 1rem 0;
       border-top: 1px solid rgb(240, 240, 240);
     }
     .blog-each .blog-each-top{
       display: flex;
       justify-content: space-between;
     }
-    .blog-each .blog-each-top .blog-left a{
+    .blog-each .blog-each-top .blog-info a{
       color:  #5e6468;
       font-size: 0.9rem;
     }
-    .blog-each .blog-each-top .blog-left{
+    .blog-each .blog-each-top .blog-info{
       color:  #949494;
       margin: 0;
       font-size: 0.9rem;
@@ -430,6 +427,9 @@
       .body-header {
         margin-bottom: 15px;
       }
+      .body-header-title {
+        height: 35px;
+      }
       .body-container h1 {
         font-size: 1.5rem;
       }
@@ -444,14 +444,30 @@
         font-size: .8rem;
       }
       h2{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
       }
       h3{
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       .blog-each h3 {
         margin: 5px 0 0;
         font-size: 1rem;
+      }
+      .notion-md {
+        font-size: 0.8rem;
+      }
+      /* blog */
+      .blog-each {
+        padding: .5rem 0;
+      }
+      .blog-each .blog-each-top p.blog-info{
+        font-size: 0.5rem;
+      }
+      .blog-each h3{
+        margin-top: 0;
+      }
+      .alert {
+        font-size: 0.8rem;
       }
     }
   </style>

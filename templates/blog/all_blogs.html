@@ -12,11 +12,11 @@
   <!-- body-header-bar -->
   <div class="body-header">
     <h1>メモ一覧</h1>
-    <div class="notion-sm">
-      <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
-        <p>・日付は月-日で検索してください。</p> -->
-      <p>※タイトル、コンテンツ、タグ、ユーザー名から検索します。</p>
-    </div>
+    <!-- <div class="notion-md">
+      <p>・ユーザー、日付、タイトルで検索できます。</p>
+        <p>・日付は月-日で検索してください。</p>
+      <p>タイトル、コンテンツ、タグ、ユーザー名から検索</p>
+    </div> -->
     <form class="search-form" action="{% url 'all_blogs_search' %}" method="get">
       <div class="search-form-row">
         <div class="search-form-each keyword1">
@@ -55,7 +55,7 @@
     {% for blog in blogs %}
       <div class="blog-each">
         <div class="blog-each-top">
-          <p class="blog-left">
+          <p class="blog-info">
             {% if request.user == blog.user %}
               <a href="{% url 'dashboard' user.id %}">あなた</a>が{{blog.created}}に投稿
             {% else %}

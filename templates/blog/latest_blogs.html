@@ -43,7 +43,7 @@
       {% if blog in today_created_blogs or blog in yes_created_blogs or blog in today_updated_blogs or blog in yes_updated_blogs %}
         <div class="blog-each">
           <div class="blog-each-top">
-            <p class="blog-left">
+            <p class="blog-info">
               {% if request.user == blog.user %}
                 <a href="{% url 'dashboard' user.id %}">あなた</a>が{{blog.created}}に投稿<span class="blog-each-new">new!!</span>
               {% else %}

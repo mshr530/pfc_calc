@@ -16,12 +16,15 @@
 <div class="body-container user-page">
   <!-- food-area -->
   <div class="food-area">
-    <div class="top">
-      <h2>直近のカロリーとPFCバランス</h2>
-      <!-- <a href="">過去すべての推移</a> -->
+    <div class="body-header">
+      <div class="body-header-title">
+        <div class="body-header-left">
+          <h2>直近のカロリーとPFC</h2>
+        </div>
+      </div>
     </div>
     
-    <div class="container">
+    <div class="food-items-wrapper">
       <table>
         <tr class="table-header">
           <th class="align-left">日付</th>
@@ -111,8 +114,12 @@
 
   <!-- blog-area -->
   <div class="blog-area">
-    <div class="top">
-      <h2>最新メモ</h2>
+    <div class="body-header">
+      <div class="body-header-title">
+        <div class="body-header-left">
+          <h2>最新メモ</h2>
+        </div>
+      </div>
     </div>
     <!-- 記事一覧 -->
     <div class="blog-body">
@@ -120,7 +127,7 @@
         {% for blog in user_blogs %}
           <div class="blog-each">
             <div class="blog-each-top">
-              <p class="blog-left">{{ blog.updated }}に投稿</p>
+              <p class="blog-info">{{ blog.updated }}に投稿</p>
               <div class="blog-each-links">
                 <!-- <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a> -->
                 <!-- {% if request.user == blog.user %}

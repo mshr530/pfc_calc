@@ -12,11 +12,11 @@
   <!-- body-header-bar -->
   <div class="body-header">
     <h1>自分の記事</h1>
-    <div class="notion-sm">
-      <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
-        <p>・日付は月-日で検索してください。</p> -->
+    <!-- <div class="notion-sm">
+      <p>・ユーザー、日付、タイトルで検索できます。</p>
+        <p>・日付は月-日で検索してください。</p>
       <p>タイトル、コンテンツ、タグから検索します。</p>
-    </div>
+    </div> -->
     <form class="search-form" action="{% url 'my_blogs_search' %}" method="get">
       <div class="search-form-row">
         <div class="search-form-each keyword1">
@@ -49,7 +49,7 @@
     {% for blog in blogs %}
       <div class="blog-each">
         <div class="blog-each-top">
-          <p class="blog-left">
+          <p class="blog-info">
             {{blog.created}}に投稿
             {% if blog in today_created_blogs or blog in yes_created_blogs or blog in today_updated_blogs or blog in yes_updated_blogs %}
               <span class="blog-each-new">new!!</span>
