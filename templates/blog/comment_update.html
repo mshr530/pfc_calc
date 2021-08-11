@@ -8,13 +8,13 @@
 
 <div class="body-container blog">
   <div class="body-header">
-    <h1>編集</h1>
+    <h2>コメント編集</h2>
   </div>
   <form action="{% url 'comment_update' blog.id comment.id %}" method="post">
     {% csrf_token %}
-    <p>*が付いてるものは必須です。</p>
     {{ form.as_p }}
-    <button class="button" type="submit">完了</button>
+    <button class="button button-with-delete" type="submit">完了</button>
+    <a class='button button-delete' href="{% url 'comment_delete' blog.id comment.id %}">削除</a>
   </form>
 </div>
 {% endblock %}

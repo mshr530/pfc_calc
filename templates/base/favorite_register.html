@@ -11,10 +11,10 @@
   <!-- お気に入り追加エリア -->
   <div class="favorite-add-area">
     <div class="body-header">
-      <h1>お気に入り登録</h1>
+      <h2>お気に入り登録</h2>
     </div>
-    <div class="notion-md">
-      <p>数字は半角で、PFCのみ小数点第一位まで可</p>
+    <div class="notion">
+      <p>※数字は半角、PFCは小数点一位まで可</p>
     </div>
     <form action="{% url 'favorite_register' %}" method="post">
       {% csrf_token %}

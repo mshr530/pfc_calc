@@ -7,12 +7,12 @@
   <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
 </div>
 
-<div class="body-container">
+<div class="body-container create-html">
   <div class="body-header">
-    <h1>食べもの追加</h1>
+    <h2>食べもの追加</h2>
   </div>
-  <div class="notion-md">
-    <p>数字は半角で、PFCのみ小数点第一位まで可</p>
+  <div class="notion">
+    <p>※数字は半角、PFCは小数点一位まで可</p>
   </div>
   <form action="" method="post">
     {% csrf_token %}

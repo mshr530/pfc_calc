@@ -8,15 +8,15 @@
 </div>
 <!-- ///header-bar -->
 
-<div class="body-container">
+<div class="body-container all_blogs">
   <!-- body-header-bar -->
   <div class="body-header">
-    <h1>メモ一覧</h1>
-    <!-- <div class="notion-md">
-      <p>・ユーザー、日付、タイトルで検索できます。</p>
-        <p>・日付は月-日で検索してください。</p>
-      <p>タイトル、コンテンツ、タグ、ユーザー名から検索</p>
-    </div> -->
+    <h2>メモ一覧</h2>
+    <div class="notion">
+      <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
+        <p>・日付は月-日で検索してください。</p> -->
+      <p>※タイトル、コンテンツ、タグ、ユーザー名から検索</p>
+    </div>
     <form class="search-form" action="{% url 'all_blogs_search' %}" method="get">
       <div class="search-form-row">
         <div class="search-form-each keyword1">
@@ -65,19 +65,17 @@
               <span class="blog-each-new">new!!</span>
             {% endif %}
           </p>
-          <div class="blog-each-links">
-            <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
-            <!-- {% if request.user == blog.user %}
-              <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
-              <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
-            {% endif %} -->
-          </div>
+          <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
+          <!-- {% if request.user == blog.user %}
+            <a href="{% url 'blog_update' blog.id %}" class="far fa-edit"></a>
+            <a href="{% url 'blog_delete' blog.id %}" class="far fa-trash-alt"></a>
+          {% endif %} -->
         </div>
         <h3>{{ blog.title }}</h3>
       </div>
     {% endfor %}
   {% else %}
-    <p>｜書かれた記事はありません。｜</p>
+    <p>｜書かれた記事はありません｜</p>
   {% endif %}
 </div>
   

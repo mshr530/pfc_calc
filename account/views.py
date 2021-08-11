@@ -69,8 +69,6 @@ def register(request):
   else:
     return render(request, 'account/register.html')
 
-
-
 def login(request):
   if request.method == 'POST':
     username = request.POST['username']
@@ -106,8 +104,6 @@ def login(request):
   #     return redirect('login')
   # else:
   #   return render(request, 'account/login.html')
-
-
 
 def logout(request):
   if request.method == 'GET':
@@ -153,6 +149,7 @@ def dashboard(request, pk):
   yest_p = yesterday_user_foods.aggregate(Sum('protein'))
   yest_f = yesterday_user_foods.aggregate(Sum('fat'))
   yest_c = yesterday_user_foods.aggregate(Sum('carb'))
+
 
   # 2日前のデータを取得
   two_days_ago_user_foods = Food.objects.all().filter(user=request.user, eaten_date=db_two_days_ago)
@@ -250,7 +247,7 @@ def change_username(request, pk):
     'user': user
   }
   if request.method == 'POST':
-    old_username = request.POST['old_username']
+    old_username = user.username
     new_username = request.POST['new_username']
     new_username2 = request.POST['new_username2']
     password = request.POST['password']

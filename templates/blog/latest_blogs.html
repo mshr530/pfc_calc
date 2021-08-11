@@ -21,16 +21,16 @@
   <div class="body-header">
     <div class="body-header-title">
       <div class="body-header-left">
-        <h1>新着メモ</h1>
-        <div class="links">
-          <a href="{% url 'all_blogs' %}">全記事</a>
-          <a href="{% url 'my_blogs' %}">自分の記事</a>
-          <a href="{% url 'drafts' %}">下書き</a>
-        </div>
+        <h2>新着メモ</h2>
       </div>
       <div class="body-header-right">
-        <a href="{% url 'blog-create' %}" class="fas fa-plus"></a>
+        <a href="{% url 'blog_create' %}" class="fas fa-plus"></a>
       </div>
+    </div>
+    <div class="links">
+      <a href="{% url 'all_blogs' %}">全記事</a>
+      <a href="{% url 'my_blogs' %}">自分の記事</a>
+      <a href="{% url 'drafts' %}">下書き</a>
     </div>
   </div>
   <!-- ///body-header-bar -->
@@ -50,13 +50,11 @@
                 {{ blog.user }}が{{blog.created}}に投稿<span class="blog-each-new">new!!</span>
               {% endif %}
             </p>
-            <div class="blog-each-links">
-              <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
+            <a href="{% url 'blog' blog.id %}" class="fas fa-info-circle"></a>
               <!-- {% if request.user == blog.user %}
-                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
-                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
+                <a href="{% url 'blog_update' blog.id %}" class="far fa-edit"></a>
+                <a href="{% url 'blog_delete' blog.id %}" class="far fa-trash-alt"></a>
                 {% endif %} -->
-              </div>
             </div>
             <h3>{{ blog.title }}</h3>
           </div>
