@@ -165,7 +165,6 @@ class TargetCreate(LoginRequiredMixin, CreateView):
 
 
 def favorite(request):
-
     favorites = Favorite.objects.all().filter(user=request.user)
     br_favs = favorites.filter(category='朝')
     lu_favs = favorites.filter(category='昼')
