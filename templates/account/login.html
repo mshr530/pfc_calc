@@ -7,7 +7,7 @@
 </div>
 
 
-<div class="body-container">
+<div class="body-container login">
   {% include 'partials/_alerts.html' %}
   <form action="" method="post">
     {% csrf_token %}
@@ -17,7 +17,7 @@
     <input type="password" name='password' required>
     <button class="button" type="submit">ログイン</button>
   </form>
-  <p>アカウントをお持ちでないですか？こちらから<a class="register" href="{% url 'register' %}">ユーザー登録</a>できます。</p>
+  <p class="btm-msg">アカウントをお持ちでないですか？こちらから<a class="register-txt" href="{% url 'register' %}">ユーザー登録</a>できます。</p>
 </div>
 
 {% endblock %}
