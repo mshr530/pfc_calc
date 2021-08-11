@@ -5,17 +5,19 @@
 
 
 <!-- header-bar -->
-<div class="header-bar">
-  <div class="top-right-link">
-    <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+<div class="header-bar today-foods">
+  <div class="header-bar-top-date-and-link">
+    <span>{% now "F" %}{% now "j" %}日({% now "l" %})</span>
+    <div class="top-right-link">
+      <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
   </div>
   <div class="header-bar-main-msg">
-    <h1>ようこそ、{{ request.user }}</h1> 
+    <h1>ようこそ、{{ request.user }}</h1>
   </div>
   <div class="header-bar-bottom-msg">
     <h3>
-      今日は{% now "F" %}{% now "j" %}日({% now "l" %})
-      、合計カロリーは<span> {{ttl_kcal}} </span>です！
+      今日の合計カロリーは<span> {{ttl_kcal}} </span>です！
     </h3>
   </div>
 
@@ -28,7 +30,7 @@
   <div class="body-header">
     <div class="body-header-title">
       <div class="body-header-left">
-        <h1>今日食べたもの</h1>
+        <h2>今日食べたもの</h2>
       </div>
       <div class="body-header-right">
         <a href="{% url 'food_create' %}"><i class="fas fa-plus"></i></a>

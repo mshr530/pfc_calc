@@ -411,6 +411,8 @@ def drafts(request):
 @login_required
 def blog(request, pk):
     blog = get_object_or_404(Blog, pk=pk)
+    comments = Comment.objects.order_by('-created').filter(blog=blog.id)
+    number_of_comments = comments.count()
     if request.method == 'GET':
         form = CommentForm()
     elif request.method == 'POST':
@@ -421,8 +423,7 @@ def blog(request, pk):
             comment.user = request.user
             comment.save()
             form = CommentForm()
-    comments = Comment.objects.order_by('-created').filter(blog=blog.id)
-    number_of_comments = comments.count()
+            return redirect('blog', pk=blog.id)
 
     if blog.link_1 is not None or blog.link_2 is not None:
         link_1 = blog.link_1
@@ -475,14 +476,18 @@ class BlogCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(BlogCreate, self).form_valid(form)
+        
 
+from django.urls import reverse
 
 class BlogUpdate(LoginRequiredMixin, UpdateView):
     model = Blog
     template_name = 'blog/update.html'
     fields = ['title', 'content_1', 'content_2',
               'content_3', 'link_1', 'link_2', 'tags', 'is_public']
-    success_url = reverse_lazy('latest_blogs')
+    # success_url = reverse_lazy('latest_blogs')
+    def get_success_url(self):
+        return reverse('blog', kwargs={'pk': self.kwargs['pk']})
 
 
 class BlogDelete(LoginRequiredMixin, DeleteView):

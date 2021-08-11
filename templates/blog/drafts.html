@@ -11,7 +11,7 @@
 <div class="body-container">
   <!-- body-header-bar -->
   <div class="body-header">
-    <h1>下書き</h1>
+    <h2>下書き</h2>
   </div>
   <!-- ///body-header-bar -->
 
@@ -21,16 +21,21 @@
       {% for draft in user_drafts %}
         <div class="blog-each">
           <div class="blog-each-top">
-            <p class="blog-left">
-                {{ draft.created }}に作成
+            <p class="blog-info">
+              {% if request.user == blog.user %}
+                <a href="{% url 'dashboard' user.id %}">あなた</a>が{{blog.created}}に投稿
+              {% else %}
+                {{ blog.user }}が{{blog.created}}に投稿
+              {% endif %}
+              {% if blog in today_created_blogs or blog in yes_created_blogs or blog in today_updated_blogs or blog in yes_updated_blogs %}
+                <span class="blog-each-new">new!!</span>
+              {% endif %}
             </p>
-            <div class="blog-each-links">
-              <a href="{% url 'blog' draft.id %}" class="fas fa-info-circle"></a>
-              <!-- {% if request.user == blog.user %}
-                <a href="{% url 'blog-update' blog.id %}" class="far fa-edit"></a>
-                <a href="{% url 'blog-delete' blog.id %}" class="far fa-trash-alt"></a>
-              {% endif %} -->
-            </div>
+            <a href="{% url 'blog' draft.id %}" class="fas fa-info-circle"></a>
+            <!-- {% if request.user == blog.user %}
+              <a href="{% url 'blog_update' blog.id %}" class="far fa-edit"></a>
+              <a href="{% url 'blog_delete' blog.id %}" class="far fa-trash-alt"></a>
+            {% endif %} -->
           </div>
           <h3>{{ draft.title }}</h3>
         </div>

@@ -45,12 +45,21 @@
     a:hover {
       opacity: .7;
     }
-
+    /* start 太いオレンジの部分 */
     .header-bar{
       color: #fff;
       padding: 10px 20px;
       border-radius: 5px 5px 0 0;
       background: linear-gradient(90deg, #FFC107 0%,  #ff8b5f 40%, #ff8b5f 100%);
+    }
+    .header-bar .header-bar-top-date-and-link{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .header-bar .header-bar-top-date-and-link > span {
+      font-size: 1rem;
     }
     .header-bar .top-right-link{
       display: flex;
@@ -68,20 +77,25 @@
     .header-bar .top-right-link a i {
       margin-right: 3px;
     }
-    .header-bar  h1 {
+    .header-bar h1 {
       font-size: 1.8rem;
-      margin: 0 0 20px 0;
+    }
+    .header-bar.today-foods .header-bar-main-msg h1 {
+      font-size: 1.8rem;
+      margin-left: -5px;
+    }
+    .header-bar .header-bar-bottom-msg h3{
+      margin: 0;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: 1rem;
     }
     .header-bar .header-bar-bottom-msg span {
       color: #333;
       font-family: 'Noto Serif JP', serif;
       font-size: 1.5rem;
     }
-    .header-bar .header-bar-bottom-msg h3{
-      margin: 0;
-      font-family: 'M PLUS Rounded 1c', sans-serif;
-      font-size: 1.2rem;
-    }
+    /* end 太いオレンジの部分 */
+
     .body-container {
       padding: 20px 20px 20px;
       border-radius: 0 0 5px 5px;
@@ -94,15 +108,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 35px;
     }
     .body-header-title.favorite {
       margin-bottom: 30px;
     }
-    .body-container .body-header-left h1 {
+    .body-container h2 {
       margin: 0px;
-    }
-    .body-container h1{
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
     .body-container .body-header-right a {
       font-size: 2rem;
@@ -113,6 +126,7 @@
       display: inline-block;
       margin-right: 3px;
       color: #5e6468;
+      font-size: 1rem;
     }
     table{
       width: 100%;
@@ -149,11 +163,42 @@
     td.align-left.all-foods-data {
       padding-left: 0;
       font-size: .9rem;
-      width: 20%;
+      width: 30%;
     }
-
+    /* start input & form& button css */
+    input[type=url],
     input[type=text],
-    input[type=password],
+    input[type=password]{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 80%;
+      font-size: 1rem;
+      box-sizing: border-box;
+      display: block;
+    }
+    .all_foods input[type=text]{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 120px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .create_html input[type=text],
+    .create-html input[type=password],
+    input[type=text]{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    input[type=text]#id_eaten_date{
+      width: 120px;
+      display: block;
+      min-width: 120px;
+    }
     textarea {
       border: 1px solid #ff8b5f;
       border-radius: 5px;
@@ -163,11 +208,6 @@
       box-sizing: border-box;
       min-width: 260px;
     }
-    input[type=text]#id_eaten_date{
-      width: 120px;
-      display: block;
-      min-width: 120px;
-    }
     select,
     input[type=date],
     input[type=checkbox],
@@ -175,12 +215,11 @@
       border: 1px solid #ff8b5f;
       border-radius: 5px;
       padding: 10px;
-      width: 80px;
+      width: 90px;
       font-size: 1rem;
       background: #fff;
       box-sizing: border-box;
     }
-
     label {
       margin-top: 10px;
       display: block;
@@ -210,148 +249,28 @@
       border-radius: 5px;
     }
     .form-txt{
+      font-size: 0.8rem;
       margin: 20px 0 0;
     }
     .form-bld-txt {
+      font-size: 1.2rem;
       margin: 0 0 20px;
     }
-    .no-results {
-      padding: 20px;
-    }
-
-    .notion-sm p{
-      margin: 10px 0 0;
-      font-size: 0.8rem;
-    }
-    .notion-md p {
-      margin: 10px 0 0;
-    }
-    
-    .search-button {
-      border: 1px solid #ff8b5f;
-      background: #fff;
-      color: #ff8b5f;
-      padding: 10px 10px 7px;
-      margin-left: 10px;
-      font-size: 0.9rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .blog input[type=text],
-    .blog input[type=url],
-    .blog textarea {
-      border: 1px solid #ff8b5f;
-      border-radius: 5px;
-      padding: 10px;
-      width: 80%;
-      max-height: 500px;
-      display: block;
-      box-sizing: border-box;
-      min-width: 260px;
-    }
-
     form span {
-      font-size: 0.9rem;
-    }
-    .blog-each {
-      padding: 16px 0;
-      border-top: 1px solid rgb(240, 240, 240);
-    }
-    .blog-each .blog-each-top{
-      display: flex;
-      justify-content: space-between;
-    }
-    .blog-each .blog-each-top .blog-left a{
-      color:  #5e6468;
-      font-size: 0.9rem;
-    }
-    .blog-each .blog-each-top .blog-left{
-      color:  #949494;
-      margin: 0;
-      font-size: 0.9rem;
-    }
-    .blog-each-new {
-      margin-left: 10px;
-      color: #ff8b5f;
-    }
-    .blog-each .blog-each-top .blog-each-links a{
-      margin-left: 10px;
-    }
-    .blog-each h3 {
-      margin: 5px 0 0;
-      font-size: 1.2rem;
-    }
-    .blog-content {
-      font-size: 1.2rem;
-      line-height: 2em;
-      font-family: 'Noto Serif JP', serif;
-    }
-    .created-edit-delete {
-      display: flex;
-      justify-content: space-between;
-      height: 60px;
-    }
-    .created-edit-delete p.user-and-date {
-      line-height: 60px;
-      margin: 0;
-      color: #949494;
-    }
-    .created-edit-delete .icons {
-      line-height: 60px;
-      margin: 0;
-    }
-    .created-edit-delete .icons a {
-      margin-left: 10px;
-      font-size: 1.5rem;
-    }
-    .ref-links a {
-      display: inline-block;
-      margin: 8px 10px 20px 0;
-    }
-    .comment-area p.number-of-comments{
-      font-size: 1rem;
-      margin: 20px 0 8px;
-    }
-    .comment-area p.number-of-comments span{
-      font-size: 1.2rem;
-    }
-    .comment-area form {
-      font-size: 0.9rem;
-    }
-    .comment-area form textarea#id_text{
-      height: 60px;
-      max-height: 200px;
-      min-width: 200px;
-    }
-    .comment-area .button{
-      margin: 0;
-    }
-    .comment-area .comment{
-      margin-top: 15px;
-    }
-    .comment-area span.user {
-      color: #949494;
-    }
-    .comment-area span.date {
-      color: #949494;
       font-size: 0.8rem;
     }
-    .comment-area .comment p {
-      font-size: 1rem;
-      margin: 0;
+    .notion p{
+      margin: 10px 0 0;
+      font-size: 0.8rem;
+      text-decoration: underline;
     }
-
     .login, .register{
       color: #ff8b5f;
     }
-    ul.pagination {
-      padding: 20px 0 0 0;
-      display: inline-block;
+    .change-username input{
+      min-width: 260px;
     }
-    .class-base-pagination {
-        margin: 10px 0 0;
-    }
+      /* start search input */
     .search-form-row {
       display: flex;
       justify-content: space-between;
@@ -377,20 +296,161 @@
       margin: 20px 0;
       width: 100%;
     }
-    .search-form-each .search-form-keyword1{
-      width: 160px;
-      box-sizing: border-box;
-    }
-    .search-form-each .search-form-keyword2{
-      width: 160px;
-      box-sizing: border-box;
-    }
+    .search-form-each .search-form-keyword1,
+    .search-form-each .search-form-keyword2,
     .search-form-each .search-form-keyword3{
-      width: 160px;
+      width: 120px;
       box-sizing: border-box;
     }
-    .food-area{
-      margin-bottom: 50px;
+    .search-button {
+      border: 1px solid #ff8b5f;
+      background: #fff;
+      color: #ff8b5f;
+      padding: 10px 10px 7px;
+      margin-left: 10px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .no-results {
+      padding: 20px;
+    }
+      /* end search input */
+    
+      /* start blog input */
+    .blog_create input[type=text],
+    .all_blogs input[type=url],
+    .blog_update input[type=text],
+    .blog_update input[type=url]{
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      min-width: 260px;
+      width: 80%;
+    }
+    .all_blogs textarea {
+      border: 1px solid #ff8b5f;
+      border-radius: 5px;
+      padding: 10px;
+      width: 80%;
+      max-height: 500px;
+      display: block;
+      box-sizing: border-box;
+      min-width: 260px;
+    }
+      /* end blog input */
+    /* end input & form & button css */
+
+    /* start blog css */
+    .blog-each {
+      padding: 15px 0;
+      border-top: 1px solid rgb(240, 240, 240);
+    }
+    .blog-each .blog-each-top{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 20px;
+    }
+    .blog-each .blog-each-top .blog-info{
+      color:  #949494;
+      margin: 0;
+      font-size: 0.8rem;
+    }
+    .blog-each .blog-each-top .blog-info a{
+      color:  #5e6468;
+      font-size: 0.8rem;
+    }
+    .blog-each-new {
+      margin-left: 10px;
+      color: #ff8b5f;
+    }
+    .blog-each .blog-each-top > a{
+      font-size: 1rem;
+    }
+    .blog-each h3 {
+      margin: 5px 0 0;
+      font-size: 1.2rem;
+    }
+    .blog-content {
+      font-size: 1rem;
+      margin: 15px 0 20px;
+      line-height: 2em;
+      font-family: 'Noto Serif JP', serif;
+    }
+    .blog > .blog-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 15px;
+    }
+    .blog > .blog-info div.user-and-date p{
+      margin: 0;
+      color: #949494;
+      font-size: 0.8rem;
+    }
+    .blog > .blog-info .icons a {
+      margin-left: 10px;
+      font-size: 1.2rem;
+      color: #5e6468;
+    }
+    .ref-links a {
+      display: inline-block;
+      margin: 8px 10px 20px 0;
+    }
+    .comment-area p.number-of-comments{
+      font-size: 1rem;
+      margin: 20px 0 8px;
+    }
+    .comment-area p.number-of-comments span{
+      font-size: 1.2rem;
+    }
+    .comment-area form {
+      font-size: 0.9rem;
+    }
+    .comment-area form textarea{
+      height: 60px;
+      max-height: 200px;
+      width: 100%;
+    }
+    .comment-area .button{
+      margin: 0;
+    }
+    .comment-area .comment{
+      margin-top: 15px;
+    }
+    .comment-area .comment-top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .fa-user {
+      margin-right: 3px;
+      margin-bottom: 2px;
+      font-size: 0.8rem;
+      color: #949494;
+    }
+    .comment-area span.user {
+      color: #949494;
+    }
+    .comment-area span.date {
+      color: #949494;
+      font-size: 0.8rem;
+    }
+    .comment-area .comment p {
+      font-size: 1rem;
+      margin: 0;
+    }
+    /* end blog css */
+
+    ul.pagination {
+      padding: 20px 0 0 0;
+      display: inline-block;
+    }
+    .class-base-pagination {
+        margin: 10px 0 0;
     }
     .favorite-list {
       margin-bottom: 30px;
@@ -403,19 +463,37 @@
       margin-bottom: 10px;
       text-align: center;
     }
+    .food-area{
+      margin-bottom: 30px;
+    }
+    .dashboard h1{
+      margin: 0 0 10px;
+    }
+    .fa-plus {
+      color: #ff8b5f;
+    }
+
     @media screen and (max-width: 576px) {
+      /* end 太いオレンジの部分 */
+      .header-bar .header-bar-top-date-and-link {
+        margin-bottom: 0;
+      }
+      .header-bar .header-bar-top-date-and-link > span {
+        font-size: 0.9rem;
+      }
       .header-bar .top-right-link a {
-        height: 24px;
         color: white;
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: .9rem;
       }
       .header-bar .top-right-link a i {
         margin-right: 3px;
       }
-      .header-bar  h1 {
+      .header-bar.today-foods .header-bar-main-msg h1 {
         font-size: 1.5rem;
-        margin: 0 0 15px 0;
+      }
+      .header-bar h1 {
+        font-size: 1.5rem;
       }
       .header-bar .header-bar-bottom-msg span {
         color: #333;
@@ -427,10 +505,16 @@
         font-family: 'M PLUS Rounded 1c', sans-serif;
         font-size: .9rem;
       }
+      /* end 太いオレンジの部分 */
+
       .body-header {
         margin-bottom: 15px;
       }
-      .body-container h1 {
+      .body-header-title {
+        height: 35px;
+      }
+      .body-container .body-header-left h2,
+      .body-container h2 {
         font-size: 1.5rem;
       }
       .body-container .body-header-right a {
@@ -440,6 +524,9 @@
         display: inline-block;
         font-size: 0.8rem;
       }
+      .body-header-title.favorite {
+        margin-bottom: 15px;
+      }
       table {
         font-size: .8rem;
       }
@@ -447,11 +534,27 @@
         font-size: 1.5rem;
       }
       h3{
-        font-size: 1.2rem;
+        font-size: 1rem;
+      }
+      .blog-each {
+        padding: 10px 0;
       }
       .blog-each h3 {
-        margin: 5px 0 0;
+        margin: 0px 0 0;
         font-size: 1rem;
+      }
+      .blog-each .blog-each-top{
+        height: 15px;
+      }
+      .blog-each .blog-each-top p.blog-info,
+      .blog-each .blog-each-top p.blog-info a{
+        font-size: 10px;
+      }
+      .blog-each .blog-each-top > a{
+        font-size: .9rem;
+      }
+      .search-form-each label {
+        font-size: 0.8rem;
       }
     }
   </style>
