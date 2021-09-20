@@ -529,3 +529,10 @@ def comment_delete(request, blog_id, comment_id):
         'comment': comment,
     }
     return render(request, 'blog/comment_delete.html', context)
+
+
+@login_required
+def tag_redirect(request, blog_id):
+    blog = get_object_or_404(Blog, pk=blog_id)
+    tags = blog.tags.all
+    return redirect('all_blogs_search')

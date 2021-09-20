@@ -15,8 +15,8 @@
       {% else %}
         {{ blog.user }}が{{ blog.created }}に作成
       {% endif %} -->
-      <p>ユーザー：{{ blog.user }}</p>
-      <p>作成日時：{{ blog.created }}</p>
+      <p>{{ blog.user }}</p>
+      <p>{{ blog.created }}</p>
     </div>
     <div class="icons">
       {% if request.user == blog.user %}
@@ -44,6 +44,16 @@
       {% endif %}
       {% if link_2 %}
         <a class="button" href="{{ blog.link_2 }}">参考リンク２</a>
+      {% endif %}
+    </div>
+
+    <div class="tags">
+      {% if blog.tags %}
+        <div>タグ：
+          {% for i in blog.tags.all %}
+            <a href="{% url 'tag_redirect' %}">{{ i }}, </a>
+          {% endfor %}
+        </div>
       {% endif %}
     </div>
   </div>

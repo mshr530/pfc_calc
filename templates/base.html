@@ -104,6 +104,9 @@
     .body-header {
       margin-bottom: 30px;
     }
+    .dashboard .body-header{
+      margin-bottom: 15px;
+    }
     .body-header-title {
       height: 46px;
       display: flex;
@@ -262,14 +265,14 @@
     }
     .notion p{
       margin: 10px 0 0;
-      font-size: 0.8rem;
+      font-size: 1rem;
       text-decoration: underline;
     }
     .login-txt, .register-txt{
       color: #ff8b5f;
     }
     .change-username input{
-      min-width: 260px;
+      width: 260px;
     }
       /* start search input */
     .search-form-row {
@@ -386,6 +389,7 @@
       margin: 15px 0 20px;
       line-height: 2em;
       font-family: 'Noto Serif JP', serif;
+      letter-spacing: .05em;
     }
     .blog > .blog-info {
       display: flex;
@@ -395,8 +399,8 @@
     }
     .blog > .blog-info div.user-and-date p{
       margin: 0;
-      color: #949494;
-      font-size: 0.8rem;
+      color: #333;
+      font-size: .8rem;
     }
     .blog > .blog-info .icons a {
       margin-left: 10px;
@@ -406,6 +410,11 @@
     .ref-links a {
       display: inline-block;
       margin: 8px 10px 20px 0;
+    }
+    .blog .tags{
+      margin: 0;
+      color: #333;
+      font-size: 1rem;
     }
     .comment-area p.number-of-comments{
       font-size: 1rem;
@@ -471,7 +480,7 @@
       text-align: center;
     }
     .food-area{
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
     .dashboard h1{
       margin: 0 0 10px;
@@ -553,6 +562,9 @@
       .blog-each .blog-each-top{
         height: 15px;
       }
+      .blog .tags{
+        font-size: .8rem;
+      }
       .blog-each .blog-each-top p.blog-info,
       .blog-each .blog-each-top p.blog-info a{
         font-size: 10px;
@@ -566,6 +578,11 @@
       .login .btm-msg,
       .register .btm-msg{
         font-size: 0.8rem;
+      }
+      .notion p{
+        margin: 10px 0 0;
+        font-size: 0.8rem;
+        text-decoration: underline;
       }
     }
   </style>

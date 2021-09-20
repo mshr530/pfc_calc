@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from taggit.managers import TaggableManager 
+from taggit.managers import TaggableManager
 
 # Create your models here.
 BLOG_IS_PUBLIC = (('公開','公開'),('非公開','非公開'))
@@ -23,8 +23,9 @@ class Blog(models.Model):
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', max_length=200)
-    text = models.TextField()
+    text = models.TextField(verbose_name='コメント')
     created = models.DateTimeField(auto_now_add=True)
+    tags = TaggableManager()
     # approved_comment = models.BooleanField(default=False)
 
     # def approve(self):
