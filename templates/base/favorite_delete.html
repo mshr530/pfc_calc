@@ -14,9 +14,10 @@
     <form action="{% url 'favorite_delete' favorite.id %}" method="post">
       {% csrf_token %}
       <p class="form-txt">本当にこの食べ物を削除しますか？</p>
-      <h3 class="form-bld-txt">{{favorite.name}} ({{favorite.kcal}}kcal, {{favorite.protein}}P, {{favorite.fat}}F, {{favorite.carb}}C)</h3>
-      
-      <button class="button button-delete" type="submit">削除</button>
+      <h3 class="form-bld-txt">{{favorite.name}}</h3> 
+      <p class="nutri-txt">({{favorite.kcal}}kcal, {{favorite.protein}}P, {{favorite.fat}}F, {{favorite.carb}}C)</p>
+        
+      <a class="button button-delete" type="submit">削除</a>
     </form>
   </div>
 
