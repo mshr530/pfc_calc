@@ -15,7 +15,7 @@
     {% csrf_token %}
     <p class="form-txt">本当にこの記事を削除しますか？</p>
     <p class="form-bld-txt">{{ comment.text }}</p>
-    <a class="button button-delete" type="submit">削除</a>
+    <button class="button button-delete" type="submit">削除</button>
   </form>
 </div>
 {% endblock %}

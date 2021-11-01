@@ -15,11 +15,11 @@
     
     <form action="" method="post">
       {% csrf_token %}
-      <p class="form-txt">本当にこの食べ物を削除しますか？</p>
-      <h3 class="form-bld-txt">{{food.name}}</h3> 
+      <p class="-txt">本当にこの食べ物を削除しますか？</p>
+      <h3 class="-bld-txt">{{food.name}}</h3> 
       <p class="nutri-txt">({{food.kcal}}kcal, {{food.protein}}P, {{food.fat}}F, {{food.carb}}C)</p>
       
-    <a class='button button-delete' href="{% url 'food_delete' food.id %}">削除</a>
+    <button class='button button-delete' href="{% url 'food_delete' food.id %}">削除</button>
     </form>
   </div>
 
