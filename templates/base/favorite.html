@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}｜お気に入り登録{% endblock %}
+{% block title %}｜お気に入り一覧{% endblock %}
 {% block content %}
 
 
@@ -27,6 +27,7 @@
           <th>P</th>
           <th>F</th>
           <th>C</th>
+          <th>追加</th>
           <!-- <th>カテゴリ</th> -->
         </tr>
         {% if favorites %}
@@ -44,7 +45,10 @@
                 <!-- <td>{{ br_fav.category }}</td> -->
                 <!-- <td><a href="{% url 'favorite_update' br_fav.id %}"><i class="far fa-edit"></i></a></td>
                 <td><a href="{% url 'favorite_delete' br_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
-                <td><a href="{% url 'add_to_today_foods' br_fav.id %}"><i class="fas fa-plus"></i></a></td>
+                <td class="checkbox-area">
+                  <input type="checkbox" class="add" id="add-br">
+                  <label for="add-br" class="add"></label>
+                </td>
               </tr>
             {% endfor %}
           {% endif %}
@@ -63,48 +67,61 @@
                 <!-- <td>{{ lu_fav.category }}</td> -->
                 <!-- <td><a href="{% url 'favorite_update' lu_fav.id %}"><i class="far fa-edit"></i></a></td>
                 <td><a href="{% url 'favorite_delete' lu_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
-                <td><a href="{% url 'add_to_today_foods' lu_fav.id %}"><i class="fas fa-plus"></i></a></td>
+                <td class="checkbox-area">
+                  <input type="checkbox" class="add" id="add-lu">
+                  <label for="add-lu" class="add"></label>
+                </td>
               </tr>
             {% endfor %}
           {% endif %}
 
           {% if di_favs %}
-          <tr class="category-title" >
-            <th colspan="8" class="align-left">夕</th>
-          </tr>
-          {% for di_fav in di_favs %}
-            <tr>
-              <td class="align-left"><a href="{% url 'favorite_update' di_fav.id %}">{{ di_fav.name }}</a></td>
-              <td>{{ di_fav.kcal }}</td>
-              <td>{{ di_fav.protein }}</td>
-              <td>{{ di_fav.fat }}</td>
-              <td>{{ di_fav.carb }}</td>
-              <!-- <td>{{ di_fav.category }}</td> -->
-              <!-- <td><a href="{% url 'favorite_update' di_fav.id %}"><i class="far fa-edit"></i></a></td>
-              <td><a href="{% url 'favorite_delete' di_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
-              <td><a href="{% url 'add_to_today_foods' di_fav.id %}"><i class="fas fa-plus"></i></a></td>
+            <tr class="category-title" >
+              <th colspan="8" class="align-left">夕</th>
             </tr>
-          {% endfor %}
-        {% endif %}
+            {% for di_fav in di_favs %}
+              <tr>
+                <td class="align-left"><a href="{% url 'favorite_update' di_fav.id %}">{{ di_fav.name }}</a></td>
+                <td>{{ di_fav.kcal }}</td>
+                <td>{{ di_fav.protein }}</td>
+                <td>{{ di_fav.fat }}</td>
+                <td>{{ di_fav.carb }}</td>
+                <!-- <td>{{ di_fav.category }}</td> -->
+                <!-- <td><a href="{% url 'favorite_update' di_fav.id %}"><i class="far fa-edit"></i></a></td>
+                <td><a href="{% url 'favorite_delete' di_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
+                <td class="checkbox-area">
+                  <input type="checkbox" class="add" id="add-di">
+                  <label for="add-di" class="add"></label>
+                </td>
+              </tr>
+            {% endfor %}
+          {% endif %}
 
-        {% if sn_favs %}
-        <tr>
-          <th class="align-left">間</th>
-        </tr>
-        {% for sn_fav in sn_favs %}
+          {% if sn_favs %}
+            <tr>
+              <th class="align-left">間</th>
+            </tr>
+            {% for sn_fav in sn_favs %}
+              <tr>
+                <td class="align-left"><a href="{% url 'favorite_update' sn_fav.id %}">{{ sn_fav.name }}</a></td>
+                <td>{{ sn_fav.kcal }}</td>
+                <td>{{ sn_fav.protein }}</td>
+                <td>{{ sn_fav.fat }}</td>
+                <td>{{ sn_fav.carb }}</td>
+                <!-- <td>{{ sn_fav.category }}</td> -->
+                <!-- <td><a href="{% url 'favorite_update' sn_fav.id %}"><i class="far fa-edit"></i></a></td>
+                <td><a href="{% url 'favorite_delete' sn_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
+                <td class="checkbox-area">
+                  <input type="checkbox" class="add" id="add-sn">
+                  <label for="add-sn" class="add"></label>
+                </td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+          
           <tr>
-            <td class="align-left"><a href="{% url 'favorite_update' sn_fav.id %}">{{ sn_fav.name }}</a></td>
-            <td>{{ sn_fav.kcal }}</td>
-            <td>{{ sn_fav.protein }}</td>
-            <td>{{ sn_fav.fat }}</td>
-            <td>{{ sn_fav.carb }}</td>
-            <!-- <td>{{ sn_fav.category }}</td> -->
-            <!-- <td><a href="{% url 'favorite_update' sn_fav.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'favorite_delete' sn_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
-            <td><a href="{% url 'add_to_today_foods' sn_fav.id %}"><i class="fas fa-plus"></i></a></td>
+            <td colspan="8"><a class="add-all-selected button">選択した食べ物を追加</a></td>
           </tr>
-        {% endfor %}
-      {% endif %}
         {% else %}
           <td colspan="8" class="no-results">｜お気に入り登録された食べものはありません｜</td>
         {% endif %}
