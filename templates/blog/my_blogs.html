@@ -12,35 +12,35 @@
   <!-- body-header-bar -->
   <div class="body-header">
     <h2>自分の記事</h2>
-    <div class="notion">
-      <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
-        <p>・日付は月-日で検索してください。</p> -->
-      <p>※タイトル、コンテンツ、タグから検索</p>
-    </div>
-    <form class="search-form" action="{% url 'my_blogs_search' %}" method="get">
-      <div class="search-form-row">
-        <div class="search-form-each keyword1">
-          <label for="keyword1">キーワード１</label>
-          <input class="search-form-keyword1" type="text" name="keyword1" value='{{values.keyword1}}' placeholder="例）筋トレ">
-        </div>
-        
-        <div class="search-form-each keyword2">
-          <label for="keyword2">キーワード２</label>
-          <input class="search-form-keyword2" type="text" name="keyword2" value='{{values.keyword2}}' placeholder="例）糖質">
-        </div>
-
-        <div class="search-form-each keyword3">
-          <label for="keyword3">キーワード３</label>
-          <input class="search-form-keyword3" type="text" name="keyword3" value='{{values.keyword3}}' placeholder="例）protein">
-        </div>
-        
-      </div>
-      <div class="search-form-row">
-        <button class="search-button" type="submit">検索</button>
-      </div>
-
-    </form>
   </div>
+  <div class="notion">
+    <!-- <p>・ユーザー、日付、タイトルで検索できます。</p>
+      <p>・日付は月-日で検索してください。</p> -->
+    <p>※タイトル、コンテンツ、タグから検索</p>
+  </div>
+  <form class="search-form" action="{% url 'my_blogs_search' %}" method="get">
+    <div class="search-form-row">
+      <div class="search-form-each keyword1">
+        <label for="keyword1">キーワード１</label>
+        <input class="search-form-keyword1" type="text" name="keyword1" value='{{values.keyword1}}' placeholder="例）筋トレ">
+      </div>
+      
+      <div class="search-form-each keyword2">
+        <label for="keyword2">キーワード２</label>
+        <input class="search-form-keyword2" type="text" name="keyword2" value='{{values.keyword2}}' placeholder="例）糖質">
+      </div>
+
+      <div class="search-form-each keyword3">
+        <label for="keyword3">キーワード３</label>
+        <input class="search-form-keyword3" type="text" name="keyword3" value='{{values.keyword3}}' placeholder="例）protein">
+      </div>
+      
+    </div>
+    <div class="search-form-row">
+      <button class="search-button" type="submit">検索</button>
+    </div>
+  </form>
+
     <!-- ///body-header-bar -->
 
 <!-- 記事一覧 -->
