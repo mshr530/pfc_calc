@@ -90,7 +90,7 @@
                 <!-- <td><a href="{% url 'favorite_update' di_fav.id %}"><i class="far fa-edit"></i></a></td>
                 <td><a href="{% url 'favorite_delete' di_fav.id %}"><i class="far fa-trash-alt"></i></a></td> -->
                 <td class="checkbox-area">
-                  <input type="checkbox" class="add" id="add-di">
+                  <input type="checkbox" class="add" id="add-di" name="{{ di_fav.name }}">
                   <label for="add-di" class="add"></label>
                 </td>
               </tr>
