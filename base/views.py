@@ -30,10 +30,10 @@ def today_foods(request):
         target = Target.objects.filter(user=request.user).latest('created')
     except Target.DoesNotExist:
         target = None
-    user_breakfast_list = user_foods.filter(category='朝')
-    user_lunch_list = user_foods.filter(category='昼')
-    user_snack_list = user_foods.filter(category='間')
-    user_dinner_list = user_foods.filter(category='夕')
+    user_breakfast_list = user_foods.filter(category='Breakfast')
+    user_lunch_list = user_foods.filter(category='Lunch')
+    user_snack_list = user_foods.filter(category='Snack')
+    user_dinner_list = user_foods.filter(category='Dinner')
     # これでも合計カロリーは出る
     # kcal = foods.aggregate(Sum('kcal'))
     # protein = foods.aggregate(Sum('protein'))
@@ -166,10 +166,10 @@ class TargetCreate(LoginRequiredMixin, CreateView):
 
 def favorite(request):
     favorites = Favorite.objects.all().filter(user=request.user)
-    br_favs = favorites.filter(category='朝')
-    lu_favs = favorites.filter(category='昼')
-    di_favs = favorites.filter(category='夕')
-    sn_favs = favorites.filter(category='間')
+    br_favs = favorites.filter(category='Breakfast')
+    lu_favs = favorites.filter(category='Lunch')
+    di_favs = favorites.filter(category='Dinner')
+    sn_favs = favorites.filter(category='Snack')
     number_of_favorites = favorites.count()
 
     context = {

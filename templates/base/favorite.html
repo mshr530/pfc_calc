@@ -4,7 +4,7 @@
 
 
 <div class="header-bar">
-  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+  <a href="{% url 'today_foods' %}">&#8592; Back</a>
 </div>
 
 <div class="body-container">
@@ -33,7 +33,7 @@
         {% if favorites %}
           {% if br_favs %}
             <tr>
-              <th class="align-left">朝</th>
+              <th class="align-left">Breakfast</th>
             </tr>
             {% for br_fav in br_favs %}
               <tr>
@@ -55,7 +55,7 @@
           
           {% if lu_favs %}
             <tr>
-              <th class="align-left">昼</th>
+              <th class="align-left">Lunch</th>
             </tr>
             {% for lu_fav in lu_favs %}
               <tr>

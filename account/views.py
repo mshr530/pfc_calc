@@ -55,16 +55,16 @@ def register(request):
     if password == password2:
       # Check username
       if User.objects.filter(username=username).exists():
-        messages.error(request, '※このユーザー名は使われています')
+        messages.error(request, '※This username is already taken.')
         return redirect('register')
       else:
         # Looks good
         user = User.objects.create_user(username=username, password=password)
         user.save()
-        messages.success(request, 'ユーザー登録に成功しました')
+        messages.success(request, 'Successfully signed up')
         return redirect('login')
     else:
-      messages.error(request, '※パスワードが一致していません')
+      messages.error(request, '※Passwords are different. ')
       return redirect('register')
   else:
     return render(request, 'account/register.html')
@@ -77,10 +77,10 @@ def login(request):
     user = auth.authenticate(username=username, password=password)
     if user is not None:
       auth.login(request, user)
-      messages.success(request, 'ログインしました')
+      messages.success(request, 'Successfully logged in')
       return redirect('today_foods')
     else:
-      messages.error(request, '※ユーザー名、もしくはパスワードが間違っています')
+      messages.error(request, '※Invalid username or password')
       return redirect('login')
   else:
     return render(request, 'account/login.html')
@@ -108,7 +108,7 @@ def login(request):
 def logout(request):
   if request.method == 'GET':
     auth.logout(request)
-    messages.success(request, 'ログアウトしました')
+    messages.success(request, 'Successfully logged out.')
     return redirect('login')
 
 def dashboard(request, pk):
@@ -135,13 +135,13 @@ def dashboard(request, pk):
   db_seven_days_ago = seven_days_ago.strftime('%Y-%m-%d')
 
   # 表示させる月日
-  html_yest = yesterday.strftime('%-m月%-d日')
-  html_two_days_ago = two_days_ago.strftime('%-m月%-d日')
-  html_three_days_ago = three_days_ago.strftime('%-m月%-d日')
-  html_four_days_ago = four_days_ago.strftime('%-m月%-d日')
-  html_five_days_ago = five_days_ago.strftime('%-m月%-d日')
-  html_six_days_ago = six_days_ago.strftime('%-m月%-d日')
-  html_seven_days_ago = seven_days_ago.strftime('%-m月%-d日')
+  html_yest = yesterday.strftime('%-m/%-d')
+  html_two_days_ago = two_days_ago.strftime('%-m/%-d')
+  html_three_days_ago = three_days_ago.strftime('%-m/%-d')
+  html_four_days_ago = four_days_ago.strftime('%-m/%-d')
+  html_five_days_ago = five_days_ago.strftime('%-m/%-d')
+  html_six_days_ago = six_days_ago.strftime('%-m/%-d')
+  html_seven_days_ago = seven_days_ago.strftime('%-m/%-d')
 
   # 昨日のデータを取得
   yesterday_user_foods = Food.objects.all().filter(user=request.user, eaten_date=db_yesterday)
@@ -254,16 +254,16 @@ def change_username(request, pk):
 
     user = auth.authenticate(username=old_username, password=password)
     if new_username != new_username2:
-      messages.error(request, '※新ユーザー名が一致していません')
+      messages.error(request, "※Usernames don't match.")
       return render(request, 'account/change_username.html', context)
     else:
       if user is not None:
         user.username = new_username
         user.save()
-        messages.success(request, 'ユーザー名を変更しました')
+        messages.success(request, 'Successfully changed username.')
         return redirect('login')
       else:
-        messages.error(request, '※旧ユーザー名、またはパスワードが間違っています')
+        messages.error(request, '※Invalid Password')
         return render(request, 'account/change_username.html', context)
   else:
     return render(request, 'account/change_username.html', context)

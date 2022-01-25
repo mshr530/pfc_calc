@@ -1,7 +1,7 @@
 category_choices = {
-    '全て': '全て',
-    '朝': '朝',
-    '昼': '昼',
-    '夕': '夕',
-    '間': '間',
+    'All': 'All',
+    'Breakfast': 'Breakfast',
+    'Lunch': 'Lunch',
+    'Dinner': 'Dinner',
+    'Snack': 'Snack',
 }

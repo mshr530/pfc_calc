@@ -42,12 +42,11 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'pfc-mtake986.herokuapp.co
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'base.apps.BaseConfig',
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
     'taggit',
-    
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -125,9 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'en'
 
-TIME_ZONE = 'Asia/Tokyo'
+USE_TZ = True
 
 USE_I18N = True
 

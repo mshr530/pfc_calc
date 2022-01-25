@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% block title %}｜ログイン{% endblock %}
+{% block title %}｜Sign in{% endblock %}
 {% block content %}
 
 <div class="header-bar">
-  <h2>ログイン</h2>
+  <h2>Sign in</h2>
 </div>
 
 
@@ -11,13 +11,13 @@
   {% include 'partials/_alerts.html' %}
   <form action="" method="post">
     {% csrf_token %}
-    <label for='username'>ユーザー名</label>
+    <label for='username'>Username</label>
     <input type="text" name='username' required>
-    <label for='password'>パスワード</label>
+    <label for='password'>Password</label>
     <input type="password" name='password' required>
-    <button class="button" type="submit">ログイン</button>
+    <button class="button" type="submit">Sign in</button>
   </form>
-  <p class="btm-msg">アカウントをお持ちでないですか？こちらから<a class="register-txt" href="{% url 'register' %}">ユーザー登録</a>できます。</p>
+  <p class="btm-msg">You haven't created an account yet?? <a class="register-txt" href="{% url 'register' %}">Sign up for free!!</a></p>
 </div>
 
 {% endblock %}

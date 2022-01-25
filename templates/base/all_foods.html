@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
-{% block title %}｜一覧{% endblock %}
+{% block title %}｜All Foods{% endblock %}
 {% block content %}
 
 <div class="header-bar">
-  <a href="{% url 'today_foods' %}">&#8592; 戻る</a>
+  <a href="{% url 'today_foods' %}">&#8592; Back</a>
 </div>
 
 <div class="body-container all_foods">
   <div class="body-header">
-    <h2>食べ物一覧</h2>
+    <h2>Food list</h2>
     <!-- <div class="notion">
       <p>※食べもの名、日付、カテゴリから検索します。日付は月-日で検索してください。</p>
     </div> -->
     <form class="search-form" action="{% url 'food_search' %}" method="get">
       <div class="search-form-row">
         <div class="search-form-each food1">
-          <label for="food1">食べもの１</label>
-          <input class="search-form-food" type="text" name="food1" value='{{values.food1}}' placeholder="例）納豆">
+          <label for="food1">Food1</label>
+          <input class="search-form-food" type="text" name="food1" value='{{values.food1}}' placeholder="Chicken">
         </div>
         
         <div class="search-form-each food2">
-          <label for="food2">食べもの２</label>
-          <input class="search-form-food" type="text" name="food2" value='{{values.food2}}' placeholder="例）胸肉">
+          <label for="food2">Food2</label>
+          <input class="search-form-food" type="text" name="food2" value='{{values.food2}}' placeholder="Rice">
         </div>
         
         <div class="search-form-each">
-          <label for="date">日</label>
-          <input class="search-form-date" type="text" name="date" value='{{values.date}}' placeholder="例）6-24">
+          <label for="date">date</label>
+          <input class="search-form-date" type="text" name="date" value='{{values.date}}' placeholder="6-24">
         </div>
 
         <div class="search-form-each">
-          <label for="category">時</label>
+          <label for="category">When</label>
           <select class="search-form-category" name="category" id="type" >
             <!-- <option value='なし'>なし</option>
             <option value='朝'>朝</option>
@@ -51,7 +51,7 @@
         
       </div>
       <div class="search-form-row">
-        <button class="search-button" type="submit">検索</button>
+        <button class="search-button" type="submit">Search</button>
       </div>
 
     </form>
@@ -59,13 +59,13 @@
   <div class="food-items-wrapper">
     <table>
       <tr class="table-header">
-        <th class="align-left">食べもの</th>
+        <th class="align-left">Food</th>
         <th>kcal</th>
         <th>P</th>
         <th>F</th>
         <th>C</th>
         <!-- <th>日</th> -->
-        <th>時</th>
+        <th>When</th>
       </tr>
       {% if foods %}
         {% for food in foods %}
@@ -82,7 +82,7 @@
           </tr>
         {% endfor %}
       {% else %}
-        <td colspan="8" class="no-results">｜食べ物なし｜</td>
+        <td colspan="8" class="no-results">｜No Food｜</td>
       {% endif %}
       
     </table>
